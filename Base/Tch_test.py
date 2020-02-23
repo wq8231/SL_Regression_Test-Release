@@ -102,7 +102,7 @@ class BaseTchTest(unittest.TestCase):
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36',
             'Cookie': 'userId=%s;token=%s' % (self.adname, self.token)}
 
-        files = {'file': ('addtch.xlsx', open('..\\addtch.xlsx', 'rb'))}
+        files = {'file': ('addtch.xlsx', open(r'.\addtch.xlsx', 'rb'))}     #main文件的当前目录，所以只有一个点
         data = {'Content-Disposition': 'form-data; name="file"; filename*=utf-8''addtch.xlsx',
                 'Content-Type': 'application/msword',
                 }
