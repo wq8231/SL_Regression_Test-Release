@@ -77,7 +77,7 @@ class BaseStuTest(unittest.TestCase):
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36',
             'Cookie': 'userId=%s;token=%s' % (self.adname, self.token)}
 
-        files = {'file': ('addstu.xlsx', open('G:\\SL_Regression_Test(Release)\\addstu.xlsx', 'rb'))}
+        files = {'file': ('addstu.xlsx', open('..\\addstu.xlsx', 'rb'))}
         data = {'Content-Disposition': 'form-data; name="file"; filename*=utf-8''addstu.xlsx',
                 'Content-Type': 'application/msword',
                 }
