@@ -6,7 +6,7 @@ import HTMLTestRunner
 
 
 def suite():
-    start_dir = "..\SL_Regression_Test(Release)"
+    start_dir = "/var/lib/jenkins/workspace/SL_Regression_Test(Release)"
     top = ".\SL_Regression_Test(Release)"
     print(start_dir)
     suite = unittest.defaultTestLoader.discover(start_dir=start_dir, pattern='*test.py', top_level_dir=None)
@@ -17,7 +17,7 @@ if __name__ == '__main__':
     localtime = time.localtime(time.time())
     now = str(localtime.tm_year) + '.' + str(localtime.tm_mon) + '.' + str(localtime.tm_mday) + '.' + str(
         localtime.tm_hour) + '.' + str(localtime.tm_min)
-    fp = open('.\SL_Test_Report(%s).html' % now, 'wb')
+    fp = open('/SL_Test_Report(%s).html' % now, 'wb')
     runner = HTMLTestRunner.HTMLTestRunner(
         stream=fp,
         title='{ SL_Test_Report }',
