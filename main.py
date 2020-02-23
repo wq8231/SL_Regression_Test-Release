@@ -6,7 +6,7 @@ import HTMLTestRunner
 
 
 def suite():
-    start_dir = r"..\SL_Regression_Test(Release)"
+    start_dir = r"..\SL_Regression_Test-Release"
     top = r".\SL_Regression_Test(Release)"
     print(start_dir)
     suite = unittest.defaultTestLoader.discover(start_dir=start_dir, pattern='*test.py', top_level_dir=None)
