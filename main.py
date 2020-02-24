@@ -28,7 +28,7 @@ if __name__ == '__main__':
     suite = suite()
     runner.run(suite)
     fp.close()
-    
+
     time.sleep(1)
     CommonClass().sendemail(reportname)
 
