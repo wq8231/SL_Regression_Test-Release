@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc04b810-5ede-461f-936a-97d32d7ba27f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ras_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ras_test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +19,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+            <state relative-caret-position="266">
+              <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
               <folding>
                 <element signature="e#24#35#0" expanded="true" />
               </folding>
@@ -38,14 +40,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Login_test.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Login_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Base/Login_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="115" selection-start-line="115" selection-end-line="115" />
+            <state relative-caret-position="57">
+              <caret line="117" column="73" selection-start-line="117" selection-start-column="73" selection-end-line="117" selection-end-column="73" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ss.py" pinned="false" current-in-tab="true">
+        <entry file="file://$USER_HOME$/Desktop/ss.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -92,7 +103,6 @@
         <option value="$USER_HOME$/Desktop/DHB_Manager_Regression_Test(PreRelease)/src/Goods/BaseBrandTest.py" />
         <option value="$PROJECT_DIR$/Base/login_test.py" />
         <option value="$PROJECT_DIR$/Base/Base_test.py" />
-        <option value="$PROJECT_DIR$/ss.py" />
         <option value="$PROJECT_DIR$/common.py" />
         <option value="$PROJECT_DIR$/Mission/Tchpad.py" />
         <option value="$PROJECT_DIR$/Mission/Stupad.py" />
@@ -100,14 +110,15 @@
         <option value="$PROJECT_DIR$/Base/Stu_test.py" />
         <option value="$PROJECT_DIR$/Base/Login_test.py" />
         <option value="$PROJECT_DIR$/Base/Tch_test.py" />
+        <option value="$PROJECT_DIR$/ss.py" />
+        <option value="$USER_HOME$/Desktop/ss.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="547" />
-    <option name="y" value="32" />
-    <option name="width" value="1330" />
-    <option name="height" value="1040" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="116" />
+    <option name="width" value="1065" />
+    <option name="height" value="834" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -118,23 +129,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="SL_Regression_Test(Release)" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SL_Regression_Test(Release)" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SL_Regression_Test(Release)" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SL_Regression_Test(Release)" type="462c0819:PsiDirectoryNode" />
-              <item name="Base" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SL_Regression_Test(Release)" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SL_Regression_Test(Release)" type="462c0819:PsiDirectoryNode" />
-              <item name="Mission" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SL_Regression_Test(Release)" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SL_Regression_Test(Release)" type="462c0819:PsiDirectoryNode" />
-              <item name="Ras" type="462c0819:PsiDirectoryNode" />
+              <item name="SL_Regression_Test-Release" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SL_Regression_Test-Release" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -145,7 +141,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Base/login.py" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -159,7 +155,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.ss (1)">
     <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python">
       <module name="ras_test" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -196,6 +192,24 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="ss (1)" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
+      <module name="ras_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Desktop" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Desktop/ss.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="ss" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ras_test" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -211,7 +225,7 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ss.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="EMULATE_TERMINAL" value="true" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="Unittests for Tch_test.BaseTchTest.test_10" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -240,34 +254,21 @@
       <option name="_new_target" value="&quot;$PROJECT_DIR$/Base/Tch_test.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <configuration name="Unittests in Tchpad.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="ras_test" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Mission" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/Mission/Tchpad.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-    </configuration>
     <list>
       <item itemvalue="Python.Unnamed" />
       <item itemvalue="Python.main" />
       <item itemvalue="Python.ss" />
-      <item itemvalue="Python tests.Unittests in Tchpad.py" />
       <item itemvalue="Python tests.Unittests for Tch_test.BaseTchTest.test_10" />
       <item itemvalue="Python tests.Unittests in Tch_test.py" />
+      <item itemvalue="Python.ss (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ss (1)" />
+        <item itemvalue="Python.ss" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python tests.Unittests in Tch_test.py" />
         <item itemvalue="Python tests.Unittests for Tch_test.BaseTchTest.test_10" />
-        <item itemvalue="Python tests.Unittests in Tchpad.py" />
-        <item itemvalue="Python.ss" />
       </list>
     </recent_temporary>
   </component>
@@ -317,13 +318,12 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="94" y="0" width="1064" height="832" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1695238" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.115885414" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.28413793" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.21546961" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -367,13 +367,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://G:/下载/apache-jmeter-5.2.1/bin/jmeter.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22154">
-          <caret line="1166" column="33" selection-start-line="1166" selection-start-column="33" selection-end-line="1166" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login.py" />
     <entry file="file://$PROJECT_DIR$/Getastask.py" />
     <entry file="file://$PROJECT_DIR$/ss.py" />
@@ -570,7 +563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ss.py" />
     <entry file="file://$PROJECT_DIR$/Mission/Stupad.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -581,8 +573,8 @@
     <entry file="file://$PROJECT_DIR$/Mission/Tchpad.py" />
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+        <state relative-caret-position="266">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
           <folding>
             <element signature="e#24#35#0" expanded="true" />
           </folding>
@@ -630,13 +622,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Base/Login_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="115" selection-start-line="115" selection-end-line="115" />
+        <state relative-caret-position="57">
+          <caret line="117" column="73" selection-start-line="117" selection-start-column="73" selection-end-line="117" selection-end-column="73" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/ss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
         </state>
       </provider>
     </entry>
