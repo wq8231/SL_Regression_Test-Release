@@ -4,9 +4,9 @@ import unittest
 # from HTMLTestRunner import HTMLTestRunner
 import HTMLTestRunner
 import smtplib
-from email.header import Header
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+# from email.header import Header
+# from email.mime.text import MIMEText
+# from email.mime.multipart import MIMEMultipart
 
 
 def suite():
