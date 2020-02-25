@@ -22,6 +22,8 @@ class BaseStuTest(unittest.TestCase):
         data = '[{"stuName":"testaddstu","gradeVal":1,"classVal":480},{"stuName":"testaddstu","gradeVal":1,"classVal":480}]'
         result = requests.session().post(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['msg'],
                          '增加学生成功')
 
@@ -32,6 +34,8 @@ class BaseStuTest(unittest.TestCase):
         globals()["stuid"] = str(result.json()['data'][-1]['studentVal']) + ',' + str(
             result.json()['data'][-2]['studentVal'])
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['data'][-1]['studentName'], 'testaddstu')
 
     def test_03(self):  # 删除新增的两个学生
@@ -47,6 +51,8 @@ class BaseStuTest(unittest.TestCase):
         headers = self.adheaders
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['data'][0]['stuName'], '1号小学生')
 
     def test_05(self):  # 根据学生名字查询学生
@@ -54,6 +60,8 @@ class BaseStuTest(unittest.TestCase):
         headers = self.adheaders
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['data'][0]['stuName'], '1号小学生')
 
     def test_06(self):
@@ -62,6 +70,8 @@ class BaseStuTest(unittest.TestCase):
         data = '{"enterScore":"666","patMobiles":"13122224444","studentId":19302,"studentName":"qwer","studentNo":"sls79a9d3m","tagVals":[],"cityInside":"true"}'
         result = requests.put(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['msg'], "修改成功")
 
     def test_07(self):  # 验证导出一个班学生excle
@@ -69,6 +79,8 @@ class BaseStuTest(unittest.TestCase):
         headers = self.adheaders
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['msg'], "验证通过")
 
     def test_08(self):  # excel导入学生
@@ -83,5 +95,7 @@ class BaseStuTest(unittest.TestCase):
                 }
         result = requests.post(url=url, headers=headers, data=data, files=files)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['msg'], "导入学生成功")
     # 还差转班，excel修改学生信息

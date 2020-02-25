@@ -22,6 +22,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -30,6 +31,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -38,6 +40,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -46,6 +49,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -54,6 +58,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -62,6 +67,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -70,6 +76,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertTrue(len(result.text) > 10000)
 
@@ -78,6 +85,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -86,6 +94,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertTrue(len(result.text) > 9000)
 
@@ -94,6 +103,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -102,6 +112,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -110,6 +121,7 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -118,6 +130,8 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['code'], 200)
 
     def test_14(self): #作业提交报告
@@ -125,6 +139,8 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['code'], 200)
 
     def test_15(self): #班级错题本
@@ -132,6 +148,8 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['code'], 200)
 
     def test_16(self):#作业报告列表
@@ -139,6 +157,8 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['code'], 200)
 
     def test_17(self):#作业报告详情
@@ -146,10 +166,14 @@ class MobileTchTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['code'], 200)
     def test_18(self):#空中课堂
         url='http://api.slothtek.com/api/v1/live/push/server?teacherId=27717'
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['code'], 200)

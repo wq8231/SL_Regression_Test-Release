@@ -23,6 +23,7 @@ class BaseTchTest(unittest.TestCase):
         data = '[{"label":"testaddtch"},{"label":"testaddtch"}]'
         result = requests.post(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
         self.assertEqual(result.json()['msg'], "添加老师成功")
 
     def test_02(self):  # 查出整个学校老师数量
@@ -31,6 +32,8 @@ class BaseTchTest(unittest.TestCase):
         result = requests.get(url=url, headers=headers)
         globals()["page"] = math.ceil((result.json()['data']) / 10)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['code'], 200)
 
     def test_03(self):  # 查询整个学校老师，顺便判断刚刚添加上没有
@@ -42,6 +45,8 @@ class BaseTchTest(unittest.TestCase):
         globals()["tchid"] = str(result.json()["data"][-1]["id"]) + ',' + str(result.json()["data"][-2]["id"])
         globals()["onetchid"] = str(result.json()["data"][-1]["id"])
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['data'][-1]['teacherName'], "testaddtch")
 
     def test_04(self):  # 给刚刚添加上的老师分配班级
@@ -51,6 +56,8 @@ class BaseTchTest(unittest.TestCase):
             "onetchid"]
         result = requests.post(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['msg'], "关联 成功")
 
     def test_05(self):  # 根据班级-学科查出刚刚分配的老师，解除分配
@@ -61,6 +68,8 @@ class BaseTchTest(unittest.TestCase):
         url = 'http://yun.slothtek.com/base/api/out/v2/base/teacher/deleteAllote?alloteVal=%s' % value
         result = result.delete(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['msg'], "删除成功")
 
     def test_06(self):  # 根据关键字查老师
@@ -68,6 +77,8 @@ class BaseTchTest(unittest.TestCase):
         headers = self.adheaders
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['data'][-1]['teacherName'], "testaddtch")
 
     def test_07(self):  # 修改老师名字
@@ -76,6 +87,8 @@ class BaseTchTest(unittest.TestCase):
         headers = self.adheaders
         result = requests.put(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['msg'], "更新名字成功")
 
     def test_08(self):  # 删除刚刚添加的两个老师
@@ -83,6 +96,8 @@ class BaseTchTest(unittest.TestCase):
         headers = self.adheaders
         result = requests.delete(url=url, headers=headers)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['msg'], '删除成功')
 
     def test_09(self):  # 下载老师名单
@@ -90,6 +105,8 @@ class BaseTchTest(unittest.TestCase):
         headers = self.adheaders
         result = requests.get(url=url, headers=headers)
         print(result.headers)
+        print(url)
+
         exlen = len(result.text)
         # ex=open('G:\\SL_Regression_Test(Release)\\tch.xlsx','wb+')
         # ex.write(result.content)
@@ -108,4 +125,6 @@ class BaseTchTest(unittest.TestCase):
                 }
         result = requests.post(url=url, headers=headers, data=data, files=files)
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['msg'], "导入成功")

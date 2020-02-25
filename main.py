@@ -2,6 +2,7 @@
 import time
 import unittest
 import HTMLTestRunner
+import HTMLTestRunnerCN
 from common import CommonClass
 import os
 
@@ -19,7 +20,7 @@ if __name__ == '__main__':
     reportpath=os.path.join(os.getcwd(),r"report")
     reportname = os.path.join(reportpath, now + "Regression-test-report.html")
     fp = open(reportname, 'wb')
-    runner = HTMLTestRunner.HTMLTestRunner(
+    runner = HTMLTestRunnerCN.HTMLTestReportCN(
         stream=fp,
         title='{ SL_Test_Report }',
         # description='',

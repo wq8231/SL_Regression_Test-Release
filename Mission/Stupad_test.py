@@ -23,6 +23,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -32,6 +33,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -41,6 +43,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -50,6 +53,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -59,6 +63,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -68,6 +73,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -77,6 +83,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -86,6 +93,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -95,6 +103,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -104,6 +113,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -114,6 +124,8 @@ class MobileStuTest(unittest.TestCase):
         data='{"acceptor":[{"acceptId":27717,"acceptName":"回归测试用","acceptType":4}],"classify":0,"msg":"测试消息测试消息测试消息测试消息测试消息测试消息","title":"普通消息","type":2}'
         result = requests.post(url=url, headers=headers,data=data.encode())
         print(result.text)
+        print(url)
+
         self.assertEqual(result.json()['code'],
                          200)
 
@@ -124,6 +136,8 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
+
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -134,6 +148,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -143,6 +158,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -151,6 +167,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'],
                          200)
@@ -160,6 +177,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.post(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         globals()["filename"] =result.json()['data']['link']
         self.assertEqual(result.json()['data']['uuid'],
@@ -171,6 +189,7 @@ class MobileStuTest(unittest.TestCase):
         headers = self.headers
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertTrue(len(result.text)>3000)
 
