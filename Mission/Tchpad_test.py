@@ -6,7 +6,7 @@ from common import CommonClass
 import math
 
 
-class BaseTchTest(unittest.TestCase):
+class MobileTchTest(unittest.TestCase):
     def setUp(self):
         self.tchmd5psw = CommonClass()._md5('123456')  # 管理员账号密码
         self.tchname = '27717'

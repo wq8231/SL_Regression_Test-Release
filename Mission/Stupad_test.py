@@ -6,7 +6,7 @@ from common import CommonClass
 import math
 
 
-class BaseTchTest(unittest.TestCase):
+class MobileStuTest(unittest.TestCase):
     def setUp(self):
         self.stumd5psw = CommonClass()._md5('111111')  # 账号密码
         self.tchname = '27819'
@@ -49,6 +49,8 @@ class BaseTchTest(unittest.TestCase):
         url = 'http://api.slothtek.com/api/v1/resource/student/query?subjectId=-1&fileTypes=.mp4,.flv&pageIndex=0&pageSize=12'
         headers = self.headers
         result = requests.get(url=url, headers=headers)
+        print(result.text)
+
         self.assertEqual(result.json()['code'],
                          200)
 
