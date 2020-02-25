@@ -1,0 +1,1992 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>{ SL_Test_Report }</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/Chart.js/0.2.0/Chart.min.js"></script>
+    <!-- <link href="https://cdn.bootcss.com/echarts/3.8.5/echarts.common.min.js" rel="stylesheet">   -->
+    
+    
+<style type="text/css" media="screen">
+body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+table       { font-size: 100%; }
+pre         {  }
+/* -- heading ---------------------------------------------------------------------- */
+h1 {
+	font-size: 16pt;
+	color: gray;
+}
+.heading {
+    font-size: 12px;
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+	margin-left: 10px;
+}
+.heading .attribute {
+    font-size: 12px;
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+.heading .description {
+    font-size: 12px;
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- css div popup ------------------------------------------------------------------------ */
+a.popup_link {
+}
+a.popup_link:hover {
+    color: red;
+}
+.popup_window {
+    display: none;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    /*border: solid #627173 1px; */
+    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 12pt;
+    width: 500px;
+}
+}
+/* -- report ------------------------------------------------------------------------ */
+#show_detail_line {
+    margin-top: 3ex;
+    margin-bottom: 1ex;
+    margin-left: 10px;
+}
+#result_table {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #777;
+    margin-left: 10px;
+}
+#header_row {
+    font-weight: bold;T
+    color: #606060;
+    background-color: #f5f5f5;
+    border-top-width: 10px;
+    border-color: #d6e9c6;
+	font-size: 12px;
+}
+#result_table td {
+    font-size:10px
+    border: 1px solid #f5f5f5;
+    padding: 2px;
+}
+#total_row  { font-weight: bold; }
+.passClass  { background-color: #d6e9c6; }
+.failClass  { background-color: #faebcc; }
+.errorClass { background-color: #ebccd1; }
+.passCase   { color: #6c6; }
+.failCase   { color: #c60; font-weight: bold; }
+.errorCase  { color: #c00; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+/* -- ending ---------------------------------------------------------------------- */
+#ending {
+}
+/* -- chars ---------------------------------------------------------------------- */
+.testChars {margin-left: 150px; font-size:10px; text-align:center;}
+.btn-info1 {
+    color: #fff;
+    background-color: #28B463;
+    border-color: #d6e9c6;
+}
+.btn-info2 {
+    color: #fff;
+    background-color: #D4AC0D;
+    border-color: #faebcc;
+}
+.btn-info3 {
+    color: #fff;
+    background-color: #D35400;
+    border-color: #ebccd1;
+}
+</style>
+
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+--></script>
+<div class='heading'>
+<h1>{ SL_Test_Report }</h1>
+<p class='attribute'><strong>Start Time:</strong> 2020-02-25 15:34:04</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:30.719323</p>
+<p class='attribute'><strong>Status:</strong> Pass 62 Error 2</p>
+
+<p class='description'>wq</p>
+</div>
+<div style="float:left; margin-left: 10px; font-size:12px">
+	<p> Test Case Pie charts </p>
+	<a class="btn btn-xs btn-info1">-Pass-</a><br>
+	<a class="btn btn-xs btn-info2">-Faild-</a><br>
+	<a class="btn btn-xs btn-info3">-Error-</a><br>
+</div>
+
+<div class="testChars" style="center">
+	<canvas id="myChart" width="250" height="250"></canvas>
+</div>
+
+
+<p id='show_detail_line' style="margin-left: 16px; font-size:12px">Show
+<a href='javascript:showCase(0)' class="btn btn-xs btn-primary">Summary</a>
+<a href='javascript:showCase(1)' class="btn btn-xs btn-danger">Failed</a>
+<a href='javascript:showCase(2)' class="btn btn-xs btn-info">All</a>
+</p>
+<table id='result_table'>
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="panel-title">
+    <td>Test Group/Test case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='passClass'>
+    <td>Base.Login_test.LoginTest</td>
+    <td>11</td>
+    <td>11</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c1',11)">Detail</a></td>
+</tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
+        pass</a>
+    <div id='div_pt1.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1: &lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content="IE=edge"&gt;&lt;meta name=viewport content="width=device-width,initial-scale=1"&gt;&lt;title&gt;æ°æäºå¹³å°&lt;/title&gt;&lt;link href=https://cdn.bootcss.com/video.js/7.0.3/alt/video-js-cdn.min.css rel=stylesheet&gt;&lt;link rel=icon type=image/x-icon href=static/logo.png&gt;&lt;script src=https://cdn.bootcss.com/video.js/7.0.0/video.min.js&gt;&lt;/script&gt;&lt;script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"&gt;&lt;/script&gt;&lt;script type=text/x-mathjax-config&gt;MathJax.Hub.Config({
+      showProcessingMessages: false, //å³é­jså è½½è¿ç¨ä¿¡æ¯
+      messageStyle: "none", //ä¸æ¾ç¤ºä¿¡æ¯
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["\(", "\)"],["\\(", "\\)"]], //è¡åå¬å¼éæ©ç¬¦
+        displayMath: [["\\{", "\\}"]], //æ®µåå¬å¼éæ©ç¬¦
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //é¿å¼æäºæ ç­¾
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX","Asana","Neo","Gyre","Latin "], //å¯éå­ä½
+        showMathMenu: false //å³é­å³å»èåæ¾ç¤º
+      },
+      chtml: {
+        scale: 1,                      // global scaling factor for all expressions
+        minScale: .5,                  // smallest scaling factor to use
+        matchFontHeight: true,         // true to match ex-height of surrounding font
+        mtextInheritFont: false,       // true to make mtext elements use surrounding font
+        merrorInheritFont: true,       // true to make merror text use surrounding font
+        mathmlSpacing: false,          // true for MathML spacing rules, false for TeX rules
+        skipAttributes: {},            // RFDa and other attributes NOT to copy to the output
+        exFactor: .5,                  // default size of ex in em units
+        displayAlign: 'center',        // default for indentalign when set to 'auto'
+        displayIndent: '0',            // default for indentshift when set to 'auto'
+        fontURL: '[mathjax]/components/output/chtml/fonts/woff-v2',   // The URL where the fonts are found
+        adaptiveCSS: true              // true means only produce CSS that is used in the processed equations
+      }
+   });&lt;/script&gt;&lt;link href=/static/css/app.2470fae3b7fe1a3cef7f1aeae65072ad.css rel=stylesheet&gt;&lt;/head&gt;&lt;body&gt;&lt;div id=app&gt;&lt;/div&gt;&lt;script type=text/javascript src=/static/js/manifest.f575f837829973fcae13.js&gt;&lt;/script&gt;&lt;script type=text/javascript src=/static/js/vendor.15de2590ce542a6fd007.js&gt;&lt;/script&gt;&lt;script type=text/javascript src=/static/js/app.27ddab89c7254b272e9a.js&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;&lt;script&gt;&lt;/script&gt;
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.2')" >
+        pass</a>
+    <div id='div_pt1.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.2: {"code":200,"msg":"登录成功","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.3')" >
+        pass</a>
+    <div id='div_pt1.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.3: {"code":500,"msg":"用户名或密码错误","data":null,"params":null,"sysSign":null,"succeed":false}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt1.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.4')" >
+        pass</a>
+    <div id='div_pt1.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.4: {"code":200,"msg":"登录成功","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt1.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_05</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.5')" >
+        pass</a>
+    <div id='div_pt1.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.5: {"code":200,"msg":"登录成功","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt1.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_06</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.6')" >
+        pass</a>
+    <div id='div_pt1.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.6: {"code":200,"msg":"","data":{"id":19328,"name":"政治老师","userKey":3,"time":1582010161000,"token":"edde25803a314684931cac90abf8d4fc","r-cert":"JCj87y/M18+mEP4ShNImjEIotesquounH3IeROIi/J7qmcmQRdzwlni/KQsC 7kx4IcmFo4fQwsDwhCYYujuicC5lhK8fnwntTsKS4jl1CqM2oGhhP3e8p/Aa eVSTVlHZ"},"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt1.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_07</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.7')" >
+        pass</a>
+    <div id='div_pt1.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.7: {"code":200,"msg":"","data":{"id":28000,"name":"中学生十九","userKey":4,"time":1581516693000,"token":"1848e6cec63242a5896716b379d6ed98","r-cert":"rVQGC+BF1P9tV/lsk5slw7h4Bg4MXBMM0PqF8cYnTTVLrWzRALcl4CCf4Vsb XDkJIG0HoV/PIyZpzfLduSaRjrE7CM6+sGZoU+jyaiv+NVct78/bhpkfJHT5 tvGIPAkz"},"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt1.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_08</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.8')" >
+        pass</a>
+    <div id='div_pt1.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.8: {"code":500,"msg":"用户名或密码错误","data":null,"params":null,"sysSign":null,"succeed":false}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt1.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_09</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.9')" >
+        pass</a>
+    <div id='div_pt1.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.9: {"code":200,"msg":null,"data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt1.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_10</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.10')" >
+        pass</a>
+    <div id='div_pt1.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.10: {"code":200,"msg":"","data":{"uniqueName":"sltya5ptd0","courseName":"","userKey":3,"id":19328,"nickName":"政治老师","teacherRole":"0","sex":null,"age":0,"bookIds":null,"englishName":"","stageId":2,"courseId":4,"classes":[{"schoolId":40,"classId":554,"className":"1班","teacherId":19328,"teacherName":null,"roles":[{"roleId":1500,"gradeId":7,"gradeName":"七年级","stageId":2,"stageName":"初中","courseId":4,"courseName":"政治"}],"studentCount":23,"list":[{"id":27813,"schoolId":40,"classId":554,"className":"1班","studentId":27813,"studentNo":"slsnibshvn","studentExNo":"53627813","studentName":"wqqqvv","studentSex":"男","studentAvatar":null},{"id":27924,"schoolId":40,"classId":554,"className":"1班","studentId":27924,"studentNo":"slswgcu6kw","studentExNo":"56627924","studentName":"wqqqb","studentSex":"暂无","studentAvatar":null},{"id":27982,"schoolId":40,"classId":554,"className":"1班","studentId":27982,"studentNo":"sls9t6hvce","studentExNo":"52227982","studentName":"中学生1","studentSex":"暂无","studentAvatar":null},{"id":27983,"schoolId":40,"classId":554,"className":"1班","studentId":27983,"studentNo":"slsbsvkyi7","studentExNo":"52327983","studentName":"中学生二","studentSex":"暂无","studentAvatar":null},{"id":27984,"schoolId":40,"classId":554,"className":"1班","studentId":27984,"studentNo":"slsb6tap6a","studentExNo":"52327984","studentName":"中学生三","studentSex":"暂无","studentAvatar":null},{"id":27985,"schoolId":40,"classId":554,"className":"1班","studentId":27985,"studentNo":"slsfoy0t3w","studentExNo":"52327985","studentName":"中学生四","studentSex":"暂无","studentAvatar":null},{"id":27986,"schoolId":40,"classId":554,"className":"1班","studentId":27986,"studentNo":"slstckqant","studentExNo":"52327986","studentName":"中学生五","studentSex":"暂无","studentAvatar":null},{"id":27987,"schoolId":40,"classId":554,"className":"1班","studentId":27987,"studentNo":"sls15yuav4","studentExNo":"52427987","studentName":"中学生六","studentSex":"暂无","studentAvatar":null},{"id":27988,"schoolId":40,"classId":554,"className":"1班","studentId":27988,"studentNo":"slsqshgul1","studentExNo":"52427988","studentName":"中学生七","studentSex":"暂无","studentAvatar":null},{"id":27989,"schoolId":40,"classId":554,"className":"1班","studentId":27989,"studentNo":"slsx3fmadl","studentExNo":"52427989","studentName":"中学生八","studentSex":"暂无","studentAvatar":null},{"id":27990,"schoolId":40,"classId":554,"className":"1班","studentId":27990,"studentNo":"slskgi1924","studentExNo":"52527990","studentName":"中学生九","studentSex":"暂无","studentAvatar":null},{"id":27991,"schoolId":40,"classId":554,"className":"1班","studentId":27991,"studentNo":"slsfsgn4wp","studentExNo":"52527991","studentName":"中学生十","studentSex":"暂无","studentAvatar":null},{"id":27992,"schoolId":40,"classId":554,"className":"1班","studentId":27992,"studentNo":"slsnixfrzk","studentExNo":"52527992","studentName":"中学生十一","studentSex":"暂无","studentAvatar":null},{"id":27993,"schoolId":40,"classId":554,"className":"1班","studentId":27993,"studentNo":"slsrih5igp","studentExNo":"52527993","studentName":"中学生十二","studentSex":"暂无","studentAvatar":null},{"id":27994,"schoolId":40,"classId":554,"className":"1班","studentId":27994,"studentNo":"sls3q4xzm7","studentExNo":"52627994","studentName":"中学生十三","studentSex":"暂无","studentAvatar":null},{"id":27995,"schoolId":40,"classId":554,"className":"1班","studentId":27995,"studentNo":"sls4t4yxfi","studentExNo":"52627995","studentName":"中学生十四","studentSex":"暂无","studentAvatar":null},{"id":27996,"schoolId":40,"classId":554,"className":"1班","studentId":27996,"studentNo":"slsdrkoeb2","studentExNo":"52627996","studentName":"中学生十五","studentSex":"暂无","studentAvatar":null},{"id":27997,"schoolId":40,"classId":554,"className":"1班","studentId":27997,"studentNo":"sls7h81k69","studentExNo":"52727997","studentName":"中学生十六","studentSex":"暂无","studentAvatar":null},{"id":27998,"schoolId":40,"classId":554,"className":"1班","studentId":27998,"studentNo":"sls51hq21c","studentExNo":"52727998","studentName":"中学生十七","studentSex":"暂无","studentAvatar":null},{"id":27999,"schoolId":40,"classId":554,"className":"1班","studentId":27999,"studentNo":"slshgkg015","studentExNo":"52727999","studentName":"中学生十八","studentSex":"暂无","studentAvatar":null},{"id":28000,"schoolId":40,"classId":554,"className":"1班","studentId":28000,"studentNo":"sls3tg8n47","studentExNo":"52828000","studentName":"中学生十九","studentSex":"暂无","studentAvatar":"http://file.slothtek.com/4c7dbc0144c445d0a1f24f10dec08208.png"},{"id":28001,"schoolId":40,"classId":554,"className":"1班","studentId":28001,"studentNo":"sls0er41gs","studentExNo":"52828001","studentName":"中学生二十","studentSex":"暂无","studentAvatar":"http://file.slothtek.com/818a21e8da9a45a4893496a24f1c82db.png"},{"id":51837,"schoolId":40,"classId":554,"className":"1班","studentId":51837,"studentNo":"slsuywb1xm","studentExNo":"51951837","studentName":"WQQQ","studentSex":"暂无","studentAvatar":null}]}],"avatar":null,"name":"政治老师","schools":[{"schoolId":40,"schoolName":"成都市天府三街数懒科技中学希顿校区","teacherId":19328,"teacherName":"政治老师","courseId":4,"courseName":"政治"}],"birthday":"0"},"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt1.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_11</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.11')" >
+        pass</a>
+    <div id='div_pt1.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.11: {"code":200,"msg":"","data":{"uniqueName":"sls3tg8n47","userKey":"4","id":28000,"nickName":"中学生十九","sex":null,"age":0,"englishName":"","stageId":1,"classes":[{"studentId":28000,"classGradeId":7,"classId":554,"schoolName":"成都市天府三街数懒科技中学希顿校区","schoolId":40,"studentName":"中学生十九","classGradeName":"七年级","className":"1班"}],"avatar":"http://file.slothtek.com/4c7dbc0144c445d0a1f24f10dec08208.png","name":"中学生十九","schools":[{"studentId":28000,"classGradeId":7,"classId":554,"schoolName":"成都市天府三街数懒科技中学希顿校区","schoolId":40,"studentName":"中学生十九","classGradeName":"七年级","className":"1班"}],"birthday":"0"},"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr class='errorClass'>
+    <td>Base.Stu_test.BaseStuTest</td>
+    <td>8</td>
+    <td>7</td>
+    <td>0</td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c2',8)">Detail</a></td>
+</tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.1')" >
+        pass</a>
+    <div id='div_pt2.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.1: {"code":200,"msg":"增加学生成功","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt2.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.2')" >
+        pass</a>
+    <div id='div_pt2.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.2: {"code":200,"msg":"查询成功","data":[{"studentVal":19224,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"1234567980123456798","studentName":"1号小学生","studentExNo":54619224,"studentMobile":null,"studentStageId":0,"enterScore":777.0,"patMobiles":"13112341234,13312341234","cityInside":false,"tags":[]},{"studentVal":19225,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsehpr6v8","studentName":"q号小学生","studentExNo":54819225,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":"","cityInside":true,"tags":["尖子生"]},{"studentVal":19226,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls7hmxg5x","studentName":"3号小学生","studentExNo":54919226,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19227,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slszw9pk2o","studentName":"4号小学生","studentExNo":55119227,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19228,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsgveo815","studentName":"5HAO","studentExNo":55319228,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19229,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsd9q6frb","studentName":"dsad","studentExNo":55519229,"studentMobile":"13111112222","studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19232,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsay4qtzc","studentName":"小学生7号","studentExNo":56119232,"studentMobile":null,"studentStageId":0,"enterScore":523.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19233,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls86z4sen","studentName":"小学生8号","studentExNo":56319233,"studentMobile":null,"studentStageId":0,"enterScore":524.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19234,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsn6iwpad","studentName":"小学生9号","studentExNo":56519234,"studentMobile":null,"studentStageId":0,"enterScore":525.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19235,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsurkyxs4","studentName":"小学生10号","studentExNo":56719235,"studentMobile":null,"studentStageId":0,"enterScore":526.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19236,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsnkmi9ei","studentName":"小学生11号","studentExNo":56919236,"studentMobile":null,"studentStageId":0,"enterScore":527.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19237,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsuy8c3sn","studentName":"小学生12号","studentExNo":57119237,"studentMobile":null,"studentStageId":0,"enterScore":528.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19238,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls8gqratq","studentName":"小学生13号","studentExNo":57219238,"studentMobile":null,"studentStageId":0,"enterScore":529.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19239,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsgiqi81q","studentName":"小学生14号","studentExNo":57419239,"studentMobile":null,"studentStageId":0,"enterScore":530.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19240,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsds48fa2","studentName":"小学生15号","studentExNo":57619240,"studentMobile":null,"studentStageId":0,"enterScore":531.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19241,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slslo8qtof","studentName":"小学生16号","studentExNo":57819241,"studentMobile":null,"studentStageId":0,"enterScore":532.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19242,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsdv054is","studentName":"小学生17号","studentExNo":58019242,"studentMobile":null,"studentStageId":0,"enterScore":533.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19243,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsdolol5h","studentName":"小学生18号","studentExNo":58219243,"studentMobile":null,"studentStageId":0,"enterScore":534.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19244,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls3dzi28w","studentName":"小学生19号","studentExNo":58419244,"studentMobile":null,"studentStageId":0,"enterScore":535.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19245,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsif86h2r","studentName":"小学生20号","studentExNo":58619245,"studentMobile":null,"studentStageId":0,"enterScore":536.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19246,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slswkvp78s","studentName":"小学生21号","studentExNo":58819246,"studentMobile":null,"studentStageId":0,"enterScore":537.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19247,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsxu0nb8z","studentName":"小学生22号","studentExNo":59019247,"studentMobile":null,"studentStageId":0,"enterScore":538.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19248,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsuasr04t","studentName":"小学生23号","studentExNo":59219248,"studentMobile":null,"studentStageId":0,"enterScore":539.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19249,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsm71ufr7","studentName":"小学生24号","studentExNo":59419249,"studentMobile":null,"studentStageId":0,"enterScore":540.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19250,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsgm6gr92","studentName":"小学生25号","studentExNo":59619250,"studentMobile":null,"studentStageId":0,"enterScore":541.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19251,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsqtxkvy3","studentName":"小学生26号","studentExNo":59719251,"studentMobile":null,"studentStageId":0,"enterScore":542.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19252,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsxsd1yfv","studentName":"小学生27号","studentExNo":59919252,"studentMobile":null,"studentStageId":0,"enterScore":543.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19253,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls35g4ad2","studentName":"小学生28号","studentExNo":51019253,"studentMobile":null,"studentStageId":0,"enterScore":544.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19254,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsoaxyq9a","studentName":"小学生29号","studentExNo":51019254,"studentMobile":null,"studentStageId":0,"enterScore":545.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19255,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls1409n2e","studentName":"小学生30号","studentExNo":51019255,"studentMobile":null,"studentStageId":0,"enterScore":546.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19256,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slskyoeg3a","studentName":"小学生31号","studentExNo":51019256,"studentMobile":null,"studentStageId":0,"enterScore":547.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19257,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsl80cxch","studentName":"小学生32号","studentExNo":51019257,"studentMobile":null,"studentStageId":0,"enterScore":548.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19258,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsr5ta7m9","studentName":"小学生33号","studentExNo":51119258,"studentMobile":null,"studentStageId":0,"enterScore":549.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19259,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slskgmcwoz","studentName":"小学生34号","studentExNo":51119259,"studentMobile":null,"studentStageId":0,"enterScore":550.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19260,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsrdihzyk","studentName":"小学生35号","studentExNo":51119260,"studentMobile":null,"studentStageId":0,"enterScore":551.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19261,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsk9i2t91","studentName":"小学生36号","studentExNo":51119261,"studentMobile":null,"studentStageId":0,"enterScore":552.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19262,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls4nfwkeq","studentName":"小学生37号","studentExNo":51119262,"studentMobile":null,"studentStageId":0,"enterScore":553.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19263,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsisfb6y8","studentName":"小学生38号","studentExNo":51219263,"studentMobile":null,"studentStageId":0,"enterScore":554.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19264,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls5zw9a4r","studentName":"小学生39号","studentExNo":51219264,"studentMobile":null,"studentStageId":0,"enterScore":555.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19265,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsf30bmqa","studentName":"小学生40号","studentExNo":51219265,"studentMobile":null,"studentStageId":0,"enterScore":556.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19266,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls2yb4lg4","studentName":"小学生41号","studentExNo":51219266,"studentMobile":null,"studentStageId":0,"enterScore":557.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19267,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slssogid7o","studentName":"小学生42号","studentExNo":51219267,"studentMobile":null,"studentStageId":0,"enterScore":558.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19268,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsecutiy9","studentName":"小学生43号","studentExNo":51319268,"studentMobile":null,"studentStageId":0,"enterScore":559.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19269,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls49t0s7n","studentName":"小学生44号","studentExNo":51319269,"studentMobile":null,"studentStageId":0,"enterScore":560.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19270,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slst4tbiy4","studentName":"小学生45号","studentExNo":51319270,"studentMobile":null,"studentStageId":0,"enterScore":561.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19271,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsg9feg91","studentName":"小学生46号","studentExNo":51319271,"studentMobile":null,"studentStageId":0,"enterScore":523.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19272,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsboqdb8v","studentName":"小学生47号","studentExNo":51319272,"studentMobile":null,"studentStageId":0,"enterScore":524.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19273,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsmbhc96f","studentName":"小学生48号","studentExNo":51419273,"studentMobile":null,"studentStageId":0,"enterScore":525.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19274,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsy4b50ih","studentName":"小学生49号","studentExNo":51419274,"studentMobile":null,"studentStageId":0,"enterScore":526.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19275,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsrmsm1dy","studentName":"小学生50号","studentExNo":51419275,"studentMobile":null,"studentStageId":0,"enterScore":527.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19276,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slscka2548","studentName":"小学生51号","studentExNo":51419276,"studentMobile":null,"studentStageId":0,"enterScore":528.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19277,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls9sgepbf","studentName":"小学生52号","studentExNo":51419277,"studentMobile":null,"studentStageId":0,"enterScore":529.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19300,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsgcg7e6q","studentName":"小学生53号","studentExNo":51919300,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19301,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsu6dlopr","studentName":"小学生54号","studentExNo":51919301,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19303,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsftuystm","studentName":"小学生57号","studentExNo":55719303,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19304,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls8rmikgz","studentName":"小学生58号","studentExNo":57719304,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19305,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsq4cq8cv","studentName":"小学生59号","studentExNo":59619305,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19306,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls54se5kt","studentName":"小学生60号","studentExNo":51119306,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19307,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slswm51axn","studentName":"小学生61号","studentExNo":51319307,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19308,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slskxi8lcp","studentName":"小学生62号","studentExNo":51519308,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19309,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slswgv0h86","studentName":"小学生63号","studentExNo":51719309,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19310,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsl7r5d2g","studentName":"小学生64号","studentExNo":51919310,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19311,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsp9243r4","studentName":"65HAO","studentExNo":52119311,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19313,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slse0lwl54","studentName":"66","studentExNo":52519313,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19314,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsfq7begd","studentName":"67","studentExNo":52719314,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19315,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slss8su1by","studentName":"68","studentExNo":52819315,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19316,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsvroygm6","studentName":"69","studentExNo":53019316,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19317,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slscgrwmpm","studentName":"sdads","studentExNo":53219317,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":"","cityInside":true,"tags":[]},{"studentVal":19318,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsc1zucvu","studentName":"71","studentExNo":53419318,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19319,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slskfsga1h","studentName":"72","studentExNo":53619319,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":19321,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsm91iy57","studentName":"uihuhui","studentExNo":54019321,"studentMobile":null,"studentStageId":0,"enterScore":777.0,"patMobiles":"","cityInside":true,"tags":[]},{"studentVal":33354,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slstpye689","studentName":"wqqqqcc","studentExNo":51733354,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":44355,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsz0xubco","studentName":"唐念一号","studentExNo":52444355,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":51426,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsan9d5n4","studentName":"qwwqwq","studentExNo":51351426,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":51734,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsnpvtzk7","studentName":"ewrwer","studentExNo":51751734,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":51735,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"string","studentName":"dasdasd","studentExNo":51851735,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":"string","cityInside":true,"tags":[]},{"studentVal":51737,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slst4zk0lv","studentName":"ewrwer","studentExNo":51951737,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":51738,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsd0zesxa","studentName":"曾㭎靓","studentExNo":51951738,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":51739,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls39gn50x","studentName":"aaa","studentExNo":52051739,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":51740,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls68tioy7","studentName":"bbb","studentExNo":52051740,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":51741,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsb1xsbqx","studentName":"ccc","studentExNo":52151741,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":51742,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls0wecnu2","studentName":"ddd","studentExNo":52151742,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":51834,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls4ulfmbr","studentName":"dsfsd","studentExNo":51751834,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":52917,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsgbv4ktr","studentName":"AAA","studentExNo":58952917,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":52918,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls59gblfh","studentName":"bbb","studentExNo":59552918,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":54496,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsc5vtg9p","studentName":"test","studentExNo":55254496,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":54498,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsypbcvic","studentName":"hhgjh","studentExNo":55354498,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":54727,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slshpwp356","studentName":"wqqq","studentExNo":51454727,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58340,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls9uolm01","studentName":"weqwe","studentExNo":52358340,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58341,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsdcdlgao","studentName":"wqewqe","studentExNo":52358341,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58342,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls92nydoz","studentName":"wwwdd","studentExNo":52458342,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58352,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls6s0o7gq","studentName":"wqqq","studentExNo":53058352,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58353,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls5evehdq","studentName":"wqqq","studentExNo":53058353,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58354,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls0bx8m9d","studentName":"testaddstu","studentExNo":53158354,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58358,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsp9lh1gv","studentName":"testaddstu","studentExNo":53358358,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58359,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls4rtau0b","studentName":"testaddstu","studentExNo":53458359,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58360,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsycqpg7m","studentName":"testaddstu","studentExNo":53458360,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58361,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls9129qv2","studentName":"testaddstu","studentExNo":53558361,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58362,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slspa2eb5g","studentName":"testaddstu","studentExNo":53658362,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58363,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsqmglv5d","studentName":"testaddstu","studentExNo":53658363,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58364,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slseigz8p5","studentName":"testaddstu","studentExNo":53758364,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58365,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls4nlrzgo","studentName":"testaddstu","studentExNo":53758365,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58366,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsop1ziva","studentName":"testaddstu","studentExNo":53858366,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58367,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slssrygf9e","studentName":"testaddstu","studentExNo":53958367,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58368,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsbq3hldh","studentName":"testaddstu","studentExNo":53958368,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58369,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsq6bhf95","studentName":"testaddstu","studentExNo":54058369,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58370,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsvmr1u3z","studentName":"testaddstu","studentExNo":54058370,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58371,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls6k6xsz3","studentName":"testaddstu","studentExNo":54158371,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58372,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slslhthsc3","studentName":"testaddstu","studentExNo":54158372,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58373,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slstzv2k90","studentName":"testaddstu","studentExNo":54258373,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58374,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsse9plsh","studentName":"testaddstu","studentExNo":54358374,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58375,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls9ltf8cr","studentName":"testaddstu","studentExNo":54358375,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58376,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsb5s279z","studentName":"testaddstu","studentExNo":54458376,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58377,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsi0umuo6","studentName":"testaddstu","studentExNo":54458377,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58378,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls75y940y","studentName":"testaddstu","studentExNo":54558378,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58379,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slssrym7pi","studentName":"testaddstu","studentExNo":54658379,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58380,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slszvyey9w","studentName":"testaddstu","studentExNo":54658380,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58381,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slscywa140","studentName":"testaddstu","studentExNo":54758381,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58393,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsd3rinxb","studentName":"exaddstu","studentExNo":55458393,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58394,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsu3klk1w","studentName":"我去","studentExNo":55458394,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58395,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsr8oyga2","studentName":"exaddstu","studentExNo":55558395,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58396,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsryevyvf","studentName":"asdf","studentExNo":55558396,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58397,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsgvr6lgf","studentName":"exaddstu","studentExNo":55658397,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58399,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsfucorl0","studentName":"exaddstu","studentExNo":55758399,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58400,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsothr72z","studentName":"exaddstu","studentExNo":55858400,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58401,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls1y7i1fx","studentName":"exaddstu","studentExNo":55858401,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58402,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slscoxd25i","studentName":"exaddstu","studentExNo":51158402,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58403,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls1e7pf8p","studentName":"exaddstu","studentExNo":51758403,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58404,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slszharbg1","studentName":"exaddstu","studentExNo":52358404,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58405,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls6b8mbdi","studentName":"exaddstu","studentExNo":52958405,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58406,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls9khio4u","studentName":"exaddstu","studentExNo":53558406,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58415,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsdp5stx4","studentName":"exaddstu","studentExNo":58758415,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58416,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsvdrxpdm","studentName":"exaddstu","studentExNo":59358416,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58421,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls1gmhlud","studentName":"exaddstu","studentExNo":51258421,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58422,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slssycyg54","studentName":"exaddstu","studentExNo":51258422,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58423,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsuh790f5","studentName":"exaddstu","studentExNo":51358423,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58424,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls4v6shp0","studentName":"exaddstu","studentExNo":51458424,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58427,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsr5dapkr","studentName":"exaddstu","studentExNo":51558427,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58428,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsz9mpg36","studentName":"exaddstu","studentExNo":51658428,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58429,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slslzayveg","studentName":"qwe","studentExNo":51658429,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58430,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls5ehdfah","studentName":"qwe","studentExNo":51758430,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58435,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls0xw3zl0","studentName":"exaddstu","studentExNo":52058435,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58436,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsn2tuhf1","studentName":"exaddstu","studentExNo":52158436,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58439,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slspo2x4un","studentName":"exaddstu","studentExNo":52258439,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58440,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls464zfkg","studentName":"exaddstu","studentExNo":52358440,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58466,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsn8yxwof","studentName":"exaddstu","studentExNo":53858466,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58467,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsixshi8l","studentName":"exaddstu","studentExNo":53958467,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58472,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsnx0tbyi","studentName":"exaddstu","studentExNo":54258472,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58473,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slselkqari","studentName":"exaddstu","studentExNo":54258473,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58480,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls5d4mu02","studentName":"exaddstu","studentExNo":54658480,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58481,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsa4yqhcu","studentName":"exaddstu","studentExNo":54758481,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58488,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slss3pb18s","studentName":"exaddstu","studentExNo":55158488,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58489,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls6gno3xf","studentName":"exaddstu","studentExNo":55158489,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58516,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsco3a0pw","studentName":"exaddstu","studentExNo":59358516,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58517,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsp9iow4i","studentName":"exaddstu","studentExNo":59958517,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58524,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsqp1r8t2","studentName":"exaddstu","studentExNo":51458524,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58525,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slswc0ad1s","studentName":"exaddstu","studentExNo":51458525,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58532,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsbdfs0ic","studentName":"exaddstu","studentExNo":51858532,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58533,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls3l7z3zc","studentName":"exaddstu","studentExNo":51958533,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58540,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls2z7l5wa","studentName":"exaddstu","studentExNo":52358540,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58541,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsqebuhcx","studentName":"exaddstu","studentExNo":52358541,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58548,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slszimo4ok","studentName":"exaddstu","studentExNo":52858548,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58549,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slskcq237t","studentName":"exaddstu","studentExNo":52858549,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58556,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsyms9gdr","studentName":"exaddstu","studentExNo":53258556,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58557,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsnhv5va9","studentName":"exaddstu","studentExNo":53358557,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58568,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsn2hnpdr","studentName":"exaddstu","studentExNo":53958568,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58569,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls0p7gks3","studentName":"exaddstu","studentExNo":54058569,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58576,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsm89vg5s","studentName":"exaddstu","studentExNo":54458576,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58577,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsbi8q0my","studentName":"exaddstu","studentExNo":54558577,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58584,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls8zgr0z3","studentName":"exaddstu","studentExNo":54958584,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58585,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slspxtem3k","studentName":"exaddstu","studentExNo":54958585,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58592,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsf3bcqg1","studentName":"exaddstu","studentExNo":55358592,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58593,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls8ped2qh","studentName":"exaddstu","studentExNo":55458593,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58600,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls0qvackg","studentName":"exaddstu","studentExNo":55858600,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58601,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsxni5dvc","studentName":"exaddstu","studentExNo":55858601,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58608,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls908y312","studentName":"exaddstu","studentExNo":54658608,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58609,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsixykzgp","studentName":"exaddstu","studentExNo":55258609,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58616,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls4rzi89q","studentName":"exaddstu","studentExNo":59358616,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58617,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls3i4lg8n","studentName":"exaddstu","studentExNo":59958617,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58624,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsdlmywot","studentName":"exaddstu","studentExNo":51458624,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58625,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsesm915s","studentName":"exaddstu","studentExNo":51458625,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58632,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls4ihf6vo","studentName":"exaddstu","studentExNo":51858632,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58633,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsxigpl4g","studentName":"exaddstu","studentExNo":51958633,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58640,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsggndrsn","studentName":"exaddstu","studentExNo":52358640,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58641,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsd97q7sa","studentName":"exaddstu","studentExNo":52458641,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58656,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slswm825vd","studentName":"exaddstu","studentExNo":53258656,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58657,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsipi80ox","studentName":"exaddstu","studentExNo":53358657,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58664,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slssl4kf50","studentName":"exaddstu","studentExNo":53758664,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58665,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsuw39qgq","studentName":"exaddstu","studentExNo":53858665,"studentMobile":null,"studentStageId":0,"enterScore":-1.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58690,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"slsf8yvzr8","studentName":"testaddstu","studentExNo":55258690,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]},{"studentVal":58691,"schoolId":40,"stageId":1,"gradeId":1,"classId":480,"studentNo":"sls05k1q1y","studentName":"testaddstu","studentExNo":55358691,"studentMobile":null,"studentStageId":0,"enterScore":0.0,"patMobiles":null,"cityInside":true,"tags":[]}],"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt2.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.3')" >
+        pass</a>
+    <div id='div_pt2.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.3: {"code":200,"msg":"删除成功","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt2.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.4')" >
+        pass</a>
+    <div id='div_pt2.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.4: {"code":200,"msg":"查询成功","data":[{"gradeVal":1,"classVal":480,"stuVal":19224,"stuName":"1号小学生","stuNo":"1234567980123456798","stuExNo":"54619224","className":"一年级1班","cityInside":false}],"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt2.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_05</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.5')" >
+        pass</a>
+    <div id='div_pt2.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.5: {"code":200,"msg":"查询成功","data":[{"gradeVal":1,"classVal":480,"stuVal":19224,"stuName":"1号小学生","stuNo":"1234567980123456798","stuExNo":"54619224","className":"一年级1班","cityInside":false}],"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt2.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_06</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.6')" >
+        pass</a>
+    <div id='div_pt2.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.6: {"code":200,"msg":"修改成功","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt2.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_07</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt2.7')" >
+        pass</a>
+    <div id='div_pt2.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt2.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt2.7: {"code":200,"msg":"验证通过","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='ft2.8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_08</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.8')" >
+        error</a>
+    <div id='div_ft2.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.8: Traceback (most recent call last):
+  File "D:\Regression_Test\SL_Regression_Test-Release\Base\Stu_test.py", line 80, in test_08
+    files = {'file': ('addstu.xlsx', open('/var/lib/jenkins/workspace/SL_Regression_Test(Release)/addstu.xlsx', 'rb'))}  #main文件的当前目录，所以只有一个点
+FileNotFoundError: [Errno 2] No such file or directory: '/var/lib/jenkins/workspace/SL_Regression_Test(Release)/addstu.xlsx'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr class='errorClass'>
+    <td>Base.Tch_test.BaseTchTest</td>
+    <td>10</td>
+    <td>9</td>
+    <td>0</td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c3',10)">Detail</a></td>
+</tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.1')" >
+        pass</a>
+    <div id='div_pt3.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.1: {"code":200,"msg":"添加老师成功","data":{},"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.2')" >
+        pass</a>
+    <div id='div_pt3.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.2: {"code":200,"msg":"","data":552,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt3.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.3')" >
+        pass</a>
+    <div id='div_pt3.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.3: {"code":200,"msg":"","data":[{"id":58692,"schoolId":40,"teacherName":"testaddtch","roleTuples":[{"label":"任课老师","value":"1500"}],"courses":[],"classes":[],"teacherMobile":null,"avatar":null},{"id":58693,"schoolId":40,"teacherName":"testaddtch","roleTuples":[{"label":"任课老师","value":"1500"}],"courses":[],"classes":[],"teacherMobile":null,"avatar":null}],"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt3.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.4')" >
+        pass</a>
+    <div id='div_pt3.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.4: {"code":200,"msg":"关联 成功","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt3.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_05</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.5')" >
+        pass</a>
+    <div id='div_pt3.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.5: {"code":200,"msg":"删除成功","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt3.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_06</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.6')" >
+        pass</a>
+    <div id='div_pt3.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.6: {"code":200,"msg":"","data":[{"id":58692,"schoolId":40,"teacherName":"testaddtch","roleTuples":[{"label":"任课老师","value":"1500"}],"courses":[],"classes":[],"teacherMobile":null,"avatar":null},{"id":58693,"schoolId":40,"teacherName":"testaddtch","roleTuples":[{"label":"任课老师","value":"1500"}],"courses":[],"classes":[],"teacherMobile":null,"avatar":null}],"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt3.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_07</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.7')" >
+        pass</a>
+    <div id='div_pt3.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.7: {"code":200,"msg":"更新名字成功","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt3.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_08</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.8')" >
+        pass</a>
+    <div id='div_pt3.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.8: {"code":200,"msg":"删除成功","data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt3.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_09</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.9')" >
+        pass</a>
+    <div id='div_pt3.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.9: {'Server': 'nginx/1.10.2', 'Date': 'Tue, 25 Feb 2020 07:34:22 GMT', 'Content-Type': 'application/vnd.ms-excel;charset=UTF-8', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'Set-Cookie': 'userId=19221; Max-Age=86400; Expires=Wed, 26-Feb-2020 07:34:12 GMT; Path=/, token=7939c8953be646348db4c8e6199f51ad; Max-Age=86400; Expires=Wed, 26-Feb-2020 07:34:12 GMT; Path=/', 'Content-Disposition': 'attachment;filename=æ\x88\x90é\x83½å¸\x82å¤©åº\x9cä¸\x89è¡\x97æ\x95°æ\x87\x92ç§\x91æ\x8a\x80ä¸\xadå\xad¦å¸\x8cé¡¿æ\xa0¡å\x8cºæ\x95\x99å¸\x88å\x90\x8då\x8d\x95.xls', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive'}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='ft3.10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_10</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft3.10')" >
+        error</a>
+    <div id='div_ft3.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft3.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft3.10: Traceback (most recent call last):
+  File "D:\Regression_Test\SL_Regression_Test-Release\Base\Tch_test.py", line 105, in test_10
+    files = {'file': ('addtch.xlsx', open('/var/lib/jenkins/workspace/SL_Regression_Test(Release)/addtch.xlsx', 'rb'))}     #main文件的当前目录，所以只有一个点
+FileNotFoundError: [Errno 2] No such file or directory: '/var/lib/jenkins/workspace/SL_Regression_Test(Release)/addtch.xlsx'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>Mission.Stupad_test.BaseTchTest</td>
+    <td>17</td>
+    <td>17</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c4',17)">Detail</a></td>
+</tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.1')" >
+        pass</a>
+    <div id='div_pt4.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.1: {"code":200,"msg":"","data":{"pageIndex":0,"pageSize":12,"pageCount":1,"count":2,"list":[{"id":24111,"name":"dfdfdf.pdf","type":11,"typeName":"其他","schoolId":40,"stageId":2,"stageName":"初中","subjectId":48,"subjectName":"语文","versionId":340,"versionName":null,"bookId":2115,"resId":45371,"resUuid":"8fcb34bd62e14337992fc80f995e5344","courseName":null,"icon":"http://file.slothtek.com/8fcb34bd62e14337992fc80f995e5344_preview_1.jpg","format":"PDF","suffix":".pdf","size":4285,"duration":0,"authorId":37336,"receiver":"3班","authorName":"电子书下载管理员","authorIcon":null,"path":null,"playPath":null,"previews":["http://file.slothtek.com/8fcb34bd62e14337992fc80f995e5344_preview_1.jpg"],"views":0,"downloads":0,"favorites":0,"comments":0,"praises":0,"shares":0,"rating":0.0,"sitThroughs":0,"understands":0,"notUnderstands":0,"createTime":1582612323000,"ifSitThrough":false},{"id":5003,"name":"微课_2019-09-04_18-38-33.mp4","type":5,"typeName":"微课","schoolId":40,"stageId":0,"stageName":"高中","subjectId":-1,"subjectName":null,"versionId":-1,"versionName":null,"bookId":-1,"resId":33253,"resUuid":"595d5208bca442ef8a2ae4ab6adf1aad","courseName":null,"icon":"http://file.slothtek.com/preview/11b35fc05dca4af8aa0bc6cac1ea8e54_thumbnail.jpg","format":"VIDEO","suffix":".mp4","size":1179708,"duration":4135,"authorId":27953,"receiver":"3班 (七年级)","authorName":"老师CC","authorIcon":null,"path":null,"playPath":"http://file.slothtek.com/595d5208bca442ef8a2ae4ab6adf1aad.mp4?avvod/m3u8/s/1024x640/vb/1024k/autosave/1","previews":null,"views":0,"downloads":0,"favorites":0,"comments":0,"praises":0,"shares":0,"rating":0.0,"sitThroughs":0,"understands":0,"notUnderstands":0,"createTime":1567593629000,"ifSitThrough":false}]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.2')" >
+        pass</a>
+    <div id='div_pt4.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.2: {"code":200,"msg":"","data":{"pageIndex":0,"pageSize":12,"pageCount":1,"count":1,"list":[{"id":24075,"name":"wx_camera_1581409275829.mp4","type":5,"typeName":"微课","schoolId":40,"stageId":2,"stageName":"初中","subjectId":36,"subjectName":"数学","versionId":264,"versionName":null,"bookId":1759,"resId":45802,"resUuid":"c_f8da09be74f94903a265118933c4e04c","courseName":null,"icon":"http://file.slothtek.com/preview/148af13cb4a144bb937c7592c2107385_thumbnail.jpg","format":"VIDEO","suffix":".mp4","size":2611796,"duration":15163,"authorId":44340,"receiver":"sssssx","authorName":"老师A","authorIcon":null,"path":null,"playPath":"http://file.slothtek.com/c_f8da09be74f94903a265118933c4e04c.mp4?avvod/m3u8/s/1280x800/autosave/1","previews":null,"views":0,"downloads":0,"favorites":0,"comments":0,"praises":0,"shares":0,"rating":0.0,"sitThroughs":0,"understands":0,"notUnderstands":0,"createTime":1582610404000,"ifSitThrough":false}]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.3')" >
+        pass</a>
+    <div id='div_pt4.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.3: {"code":200,"msg":"","data":{"pageIndex":0,"pageSize":12,"pageCount":1,"count":1,"list":[{"id":5003,"name":"微课_2019-09-04_18-38-33.mp4","type":5,"typeName":"微课","schoolId":40,"stageId":0,"stageName":"高中","subjectId":-1,"subjectName":null,"versionId":-1,"versionName":null,"bookId":-1,"resId":33253,"resUuid":"595d5208bca442ef8a2ae4ab6adf1aad","courseName":null,"icon":"http://file.slothtek.com/preview/11b35fc05dca4af8aa0bc6cac1ea8e54_thumbnail.jpg","format":"VIDEO","suffix":".mp4","size":1179708,"duration":4135,"authorId":27953,"receiver":"3班 (七年级)","authorName":"老师CC","authorIcon":null,"path":null,"playPath":"http://file.slothtek.com/595d5208bca442ef8a2ae4ab6adf1aad.mp4?avvod/m3u8/s/1024x640/vb/1024k/autosave/1","previews":null,"views":0,"downloads":0,"favorites":0,"comments":0,"praises":0,"shares":0,"rating":0.0,"sitThroughs":0,"understands":0,"notUnderstands":0,"createTime":1567593629000,"ifSitThrough":false}]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt4.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_05</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.5')" >
+        pass</a>
+    <div id='div_pt4.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.5: {"code":200,"msg":"","data":[{"missionId":7290,"fromType":1,"createId":27717,"courseId":1,"createName":"回归测试用","title":"02月25日语文作业","createTime":1582610735000,"items":[{"studentId":27819,"studentName":"sssssx","studentIcon":null,"correctObjectiveScore":2.0,"correctSubjectiveScore":10.0,"correctScore":12.0,"finishTime":1582610757000,"reviews":[]}]}],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_06</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.6')" >
+        pass</a>
+    <div id='div_pt4.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.6: {"code":200,"msg":"","data":[{"missionId":7290,"fromType":1,"fromSubjectId":0,"courseId":1,"courseIcon":null,"createId":27717,"createName":"回归测试用","title":"02月25日语文作业","createTime":1582610735000,"finishTime":1582612500000,"answerTime":1582612500000,"totalScore":0,"studentId":27819,"studentName":"sssssx","correctId":27717,"correctObjectiveScore":2.0,"correctSubjectiveScore":10.0,"correctScore":12.0,"correctTime":1582611221000,"correctStatus":16,"correctRank":1,"errorCount":0,"remark":null}],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_07</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.7')" >
+        pass</a>
+    <div id='div_pt4.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.7: {"code":200,"msg":"","data":{"missionId":7290,"fromType":1,"commitId":27819,"commitName":"sssssx","finishTime":1582610757000,"createTime":1582610735000,"answerTime":1582612500000,"title":"02月25日语文作业","totalScore":12.0,"correctScore":12.0,"objectiveScore":2.0,"subjectiveScore":10.0,"sendCount":2,"maxScore":12.0,"minScore":12.0,"avgScore":12.0,"rank":1,"correctId":27717,"correctName":"回归测试用","correctStatus":16,"materials":[{"type":6,"uuid":"c094530e33a44293aa9fd0bcac7c7aa1","url":"http://file.slothtek.com/c094530e33a44293aa9fd0bcac7c7aa1.jpg","previews":null,"useType":0,"duration":0}],"answer":null,"microVideo":null,"remark":"","comment":{"content":"","teacherId":27717,"studentId":27819,"items":[{"id":12,"reviewType":1,"reviewCode":1,"reviewTxt":"优秀作业奖","reviewIcon":"http://api.slothtek.com/imgs/r_1_1.png"}]},"parts":[{"id":13440,"partName":"单选题","topicType":1,"topicName":"单选题","totalScore":2.0,"correctScore":2.0,"correctSubjectiveScore":0.0,"correctObjectiveScore":0.0,"correctStatus":0.0,"optionNumber":1,"takeImgType":1,"correctType":1,"imgs":null,"standardAnswerImgs":null,"answerImgs":null,"correctImgs":null,"materials":null,"items":[{"id":74436,"score":2.0,"optionNumber":4,"options":["A","B","C","D"],"content":null,"imgs":null,"subjectId":0,"topicType":1,"fromType":1,"fromResId":null,"difficult":0,"standardAnswer":["A"],"standardAnswerImgs":null,"answer":["A"],"answerImgs":null,"correctScore":2.0,"correctStatus":2.0,"correctImgs":null,"subItems":null}]},{"id":13441,"partName":"简答题","topicType":5,"topicName":"简答题","totalScore":10.0,"correctScore":10.0,"correctSubjectiveScore":10.0,"correctObjectiveScore":0.0,"correctStatus":0.0,"optionNumber":1,"takeImgType":1,"correctType":1,"imgs":null,"standardAnswerImgs":null,"answerImgs":null,"correctImgs":null,"materials":null,"items":[{"id":74437,"score":10.0,"optionNumber":4,"options":null,"content":null,"imgs":null,"subjectId":0,"topicType":5,"fromType":1,"fromResId":null,"difficult":0,"standardAnswer":null,"standardAnswerImgs":null,"answer":null,"answerImgs":["http://file.slothtek.com/d36641f10d164b2485de97de3edec985.jpg","http://file.slothtek.com/d22f5e758b864997b8b3c92b0b6d600b.jpg","http://file.slothtek.com/edd36a306237443b8bbea87d59964ccd.jpg"],"correctScore":10.0,"correctStatus":2.0,"correctImgs":["http://file.slothtek.com/d36641f10d164b2485de97de3edec985.jpg","http://file.slothtek.com/d22f5e758b864997b8b3c92b0b6d600b.jpg","http://file.slothtek.com/edd36a306237443b8bbea87d59964ccd.jpg"],"subItems":null}]}],"ranks":[]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_08</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.8')" >
+        pass</a>
+    <div id='div_pt4.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.8: {"code":200,"msg":"","data":{"id":7290,"schoolId":40,"createId":27717,"fromType":1,"fromSubjectId":0,"courseId":1,"courseIcon":null,"title":"02月25日语文作业","totalScore":12.0,"acceptCount":2,"acceptName":"3班","submitCount":0,"createTime":1582610638000,"sendTime":1582610735000,"finishTime":1582612500000,"answerTime":1582612500000,"materials":[{"type":6,"uuid":"c094530e33a44293aa9fd0bcac7c7aa1","url":"http://file.slothtek.com/c094530e33a44293aa9fd0bcac7c7aa1.jpg","previews":null,"useType":0,"duration":0}],"remark":"","score":0.0,"comment":{"content":"","teacherId":27717,"studentId":27819,"items":[{"id":12,"reviewType":1,"reviewCode":1,"reviewTxt":"优秀作业奖","reviewIcon":"http://api.slothtek.com/imgs/r_1_1.png"}]},"answer":null,"originalParts":[{"id":13440,"partName":"单选题","topicType":1,"topicName":"单选题","totalScore":2.0,"imgs":null,"optionDefaultScore":2.0,"optionNumber":1,"takeImgType":1,"correctType":1,"materials":null,"items":[{"id":74436,"topicType":1,"content":null,"score":2.0,"optionNumber":4,"fromType":1,"fromResId":null,"difficultId":0,"options":["A","B","C","D"],"imgs":null,"answer":["A"],"answerImgs":null,"kpis":[],"subItems":[]}]},{"id":13441,"partName":"简答题","topicType":5,"topicName":"简答题","totalScore":10.0,"imgs":null,"optionDefaultScore":10.0,"optionNumber":1,"takeImgType":1,"correctType":1,"materials":null,"items":[{"id":74437,"topicType":5,"content":null,"score":10.0,"optionNumber":4,"fromType":1,"fromResId":null,"difficultId":0,"options":null,"imgs":null,"answer":null,"answerImgs":null,"kpis":[],"subItems":[]}]}],"parts":[{"id":13440,"partName":"单选题","partIndex":1,"topicType":1,"topicName":"单选题","totalScore":2.0,"optionNumber":1,"takeImgType":1,"correctType":1,"answerImgs":null,"correctImgs":null,"correctSubjectiveScore":0.0,"correctObjectiveScore":0.0,"correctScore":0.0,"correctStatus":0,"materials":null,"answers":[{"subjectId":0,"itemId":74436,"itemIndex":0,"itemIndexStr":null,"fromType":1,"fromResId":null,"optionNumber":4,"commitTime":1582610757000,"difficult":0,"topicType":1,"takeImgType":1,"answer":["A"],"answerImgs":null,"rightAnswer":["A"],"rightAnswerImgs":null,"score":0.0,"correctStatus":2,"correctScore":2.0,"correctImgs":null,"remark":null,"commentId":null,"commentFlag":false,"reviewIds":null,"commentContent":null,"excellentFlag":false,"subItems":null}],"commentId":null,"commentFlag":false,"reviewIds":null,"commentContent":null,"excellentFlag":false},{"id":13441,"partName":"简答题","partIndex":2,"topicType":5,"topicName":"简答题","totalScore":10.0,"optionNumber":1,"takeImgType":1,"correctType":1,"answerImgs":null,"correctImgs":null,"correctSubjectiveScore":10.0,"correctObjectiveScore":0.0,"correctScore":0.0,"correctStatus":0,"materials":null,"answers":[{"subjectId":0,"itemId":74437,"itemIndex":0,"itemIndexStr":null,"fromType":1,"fromResId":null,"optionNumber":4,"commitTime":1582610757000,"difficult":0,"topicType":5,"takeImgType":1,"answer":null,"answerImgs":["http://file.slothtek.com/d36641f10d164b2485de97de3edec985.jpg","http://file.slothtek.com/d22f5e758b864997b8b3c92b0b6d600b.jpg","http://file.slothtek.com/edd36a306237443b8bbea87d59964ccd.jpg"],"rightAnswer":null,"rightAnswerImgs":null,"score":0.0,"correctStatus":2,"correctScore":10.0,"correctImgs":["http://file.slothtek.com/d36641f10d164b2485de97de3edec985.jpg","http://file.slothtek.com/d22f5e758b864997b8b3c92b0b6d600b.jpg","http://file.slothtek.com/edd36a306237443b8bbea87d59964ccd.jpg"],"remark":null,"commentId":null,"commentFlag":false,"reviewIds":null,"commentContent":null,"excellentFlag":false,"subItems":null}],"commentId":null,"commentFlag":false,"reviewIds":null,"commentContent":null,"excellentFlag":false}]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_09</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.9')" >
+        pass</a>
+    <div id='div_pt4.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.9: {"code":200,"msg":"","data":[{"id":1,"subjectName":"语文","versions":[]},{"id":2,"subjectName":"数学","versions":[]},{"id":3,"subjectName":"英语","versions":[]},{"id":4,"subjectName":"政治","versions":[]},{"id":5,"subjectName":"历史","versions":[]},{"id":6,"subjectName":"地理","versions":[]},{"id":7,"subjectName":"物理","versions":[]},{"id":8,"subjectName":"化学","versions":[]},{"id":9,"subjectName":"生物","versions":[]},{"id":15,"subjectName":"信息技术","versions":[]}],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_10</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.10')" >
+        pass</a>
+    <div id='div_pt4.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.10: {"code":200,"msg":"","data":[],"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_11</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.11')" >
+        pass</a>
+    <div id='div_pt4.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.11: {"code":200,"msg":null,"data":null,"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_12</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.12')" >
+        pass</a>
+    <div id='div_pt4.12' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.12: {"code":200,"msg":"","data":[{"id":1,"subjectName":"语文","versions":[]},{"id":2,"subjectName":"数学","versions":[]},{"id":3,"subjectName":"英语","versions":[]},{"id":4,"subjectName":"政治","versions":[]},{"id":5,"subjectName":"历史","versions":[]},{"id":6,"subjectName":"地理","versions":[]},{"id":7,"subjectName":"物理","versions":[]},{"id":8,"subjectName":"化学","versions":[]},{"id":9,"subjectName":"生物","versions":[]},{"id":15,"subjectName":"信息技术","versions":[]}],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.13' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_13</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.13')" >
+        pass</a>
+    <div id='div_pt4.13' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.13').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.13: {"code":200,"msg":"","data":{"subjectId":24,"kpis":[{"id":1080,"name":"基础知识积累与运用","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[{"id":1081,"name":"拼音与汉字","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1086,"name":"词语","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1094,"name":"句子","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1123,"name":"标点符号","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1143,"name":"修辞手法","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1162,"name":"文学与文化常识","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1219,"name":"名著导读（部编教材所选名著篇目）","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1253,"name":"名篇名句","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1256,"name":"语言表达及应用","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]}]},{"id":1293,"name":"阅读理解与鉴赏","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[{"id":1294,"name":"记叙文阅读","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1353,"name":"说明文阅读","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1398,"name":"议论文阅读","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1429,"name":"小说阅读","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1455,"name":"散文阅读","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1476,"name":"现代诗歌鉴赏","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1502,"name":"新闻阅读","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1510,"name":"童话、寓言、神话阅读","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1514,"name":"戏剧文学（剧本）阅读","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1519,"name":"古诗鉴赏","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1603,"name":"文言文阅读","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]}]},{"id":1640,"name":"写作","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[{"id":1641,"name":"命题形式","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]},{"id":1649,"name":"写作形式","parentId":0,"graspLevel":0.0,"graspName":"无","amount":0,"rank":0,"childrens":[]}]}]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.14' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_14</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.14')" >
+        pass</a>
+    <div id='div_pt4.14' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.14').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.14: {"code":200,"msg":"","data":[],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.15' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_15</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.15')" >
+        pass</a>
+    <div id='div_pt4.15' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.15').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.15: {"code":200,"msg":"","data":[],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.16' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_16</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.16')" >
+        pass</a>
+    <div id='div_pt4.16' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.16').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.16: {"code":200,"msg":"","data":{"uuid":"8fcb34bd62e14337992fc80f995e5344","key":"8fcb34bd62e14337992fc80f995e5344.pdf","link":"http://file.slothtek.com/8fcb34bd62e14337992fc80f995e5344.pdf"},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt4.17' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_17</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt4.17')" >
+        pass</a>
+    <div id='div_pt4.17' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt4.17').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt4.17: %PDF-1.4
+1 0 obj
+&lt;&lt;
+/Title (şÿepaÒ -ub{T˜˜Sa)
+/Creator (şÿ w k h t m l t o p d f   0 . 1 2 . 5)
+/Producer (şÿ Q t   4 . 8 . 7)
+/CreationDate (D:20200210211803+08'00')
+&gt;&gt;
+endobj
+3 0 obj
+&lt;&lt;
+/Type /ExtGState
+/SA true
+/SM 0.02
+/ca 1.0
+/CA 1.0
+/AIS false
+/SMask /None&gt;&gt;
+endobj
+4 0 obj
+[/Pattern /DeviceRGB]
+endobj
+7 0 obj
+&lt;&lt;
+/Type /Catalog
+/Pages 2 0 R
+&gt;&gt;
+endobj
+5 0 obj
+&lt;&lt;
+/Type /Page
+/Parent 2 0 R
+/Contents 8 0 R
+/Resources 10 0 R
+/Annots 11 0 R
+/MediaBox [0 0 595 842]
+&gt;&gt;
+endobj
+10 0 obj
+&lt;&lt;
+/ColorSpace &lt;&lt;
+/PCSp 4 0 R
+/CSp /DeviceRGB
+/CSpg /DeviceGray
+&gt;&gt;
+/ExtGState &lt;&lt;
+/GSa 3 0 R
+&gt;&gt;
+/Pattern &lt;&lt;
+&gt;&gt;
+/Font &lt;&lt;
+/F6 6 0 R
+&gt;&gt;
+/XObject &lt;&lt;
+&gt;&gt;
+&gt;&gt;
+endobj
+11 0 obj
+[ ]
+endobj
+8 0 obj
+&lt;&lt;
+/Length 9 0 R
+/Filter /FlateDecode
+&gt;&gt;
+stream
+xœíš_KAÅßçSÜç‚fçïÎBÔÔ
+-„|(}�¨-’ˆVKûñ;w6‰1¥»çF#Ñ®w˜9™ıyïÍÙ›�½ãSúvK½áøš¦‹ãp¬ŠÃÒõñ÷ÁÃ‰èMçê†nÔH�Òïå‘çª¬l:ÎòQkcÓ°¸ğÊwuò†®ÒÓ–'®Os;½R½ICN“�üóã\]4Ku,©Ä¤¶t¨Ô�JKQie=*ÕE0XJ�Ç‹µ›;�T�½‚ÆÃÏiô‹}L�Kúò5M�m—`¨ôüy0ËíX—–Vƒ¼´ª	 c¬­{¾¤ íãU¥vO2·'œ]j»Ôv©íRÛ¥v´‹“›Ã4W�[Ï°&lt;ª\ñâj�×ö¾ˆ Á¿›äôgš¢"ë+ÒmuÒZ`-ï›Zõ¢µQwFoŠ·K¬#£‹œX�G³&lt;bæ/®õğîl™Õ6…8¥M6­6''9œHïq-;(�¨VÇTt6½?,©h[q³Öy\Ëû¶#˜Â£R"L›µ íj_ !º‡ÒgõÉôrêlæ)ã²ƒziZm¼ê5=ñh¢zïS¯dhr‘^#¼|P&amp;sÅ— ÒøŒúEQèM.U ÿzb3H½ñõéõûÔ{;½ûy:›œÿ¾£ş€:z7L1,ëû¨](7'�?Õñ$•ö}ùê¿Ë—«P½Œâ&lt;]€ÜúÄL�wTÿÆU]ÒYÿÆÅ®şUÿ\…ê?wIÏQÿÚ³ÿG¿ÁÚ—	©ÿû5ÿïB¹�ÿ{şÌ*¬ù¿wë\ÿí]cã)�¼¥l9[×‡¿à&gt;üUÄåõ×KÃ½™Ô†¤ë'¾�¶ŞÈaq,â´3ßÃkıH¾îb!íÂj�¡ªpmÚb¨äZˆ¡ğ
+¼‘k†¬yE^®…¼€WÂåZk †¸àEµ CĞZ¬E²ä18#ÖB¬Ey%¥k!Ö¢¼†ì¿¨Ÿ	=ÕF+òj®
+�¥HŒº*L,�XZ¥HŒú*J,ƒğ[ˆQg…‰Eq1ê­™XàÙÄÒ0EbÔ]QbÄÂ2EbÔ_abÄÂ4EbÔaab	D¶c¸�9ã)D¤6y[ÁZŞ71èv`[nŠ±| ‘ú¿ÿ5
+endstream
+endobj
+9 0 obj
+845
+endobj
+12 0 obj
+&lt;&lt; /Type /FontDescriptor
+/FontName /QMAAAA+NSimSun
+/Flags 4 
+/FontBBox [-7.81250000 -140.625000 1000 859.375000 ]
+/ItalicAngle 0 
+/Ascent 859.375000 
+/Descent -140.625000 
+/CapHeight 859.375000 
+/StemV 46.8750000 
+/FontFile2 13 0 R
+&gt;&gt;
+endobj
+13 0 obj
+&lt;&lt;
+/Length1 2424 
+/Length 16 0 R
+/Filter /FlateDecode
+&gt;&gt;
+stream
+xœ­TMˆE~=¿»ºYsˆ±A#LfpB0"&amp;ë²ÉÁ™u'Äì.˜ííéíé¤{º™îv3�âÏ‚�DğäI–z÷êÅƒ¢'âÁC@ÈIÖï½®�­¬³Åjªê{¯^½Ÿ¯ŞD4E#*µ;s‹«?ìıÍæ–ëwÈ88 şs¶çXİ�¿ü'ğ_˜çzP…êÏDÆs�O÷‚äöñ0®³W?´-ªŠ¼…¥X·#*"=Èfß
+œ;Å�Ÿ„üQõ&gt;rRYòÁ¢¦öÍĞE¢‚Q™.&lt; +�ù@BUxÙX_^¢—È&lt;ø•îÜ¥ÓÄS"a$ôGƒ”ÉR‰Œ¹ÿŞŞÆ�Ç^ø�‰8vY¤ñ=‰3¥kôQà“R.U•EalyÔ�ÇÓÆwcı3šeR†À…‹š¾¤á2¸j*\ÑôUªƒÃ"¥iH-
+6h–¾R¸ ü�ÂEM_Òp™� ®hú*]§û
+Ÿ(¾m¬(&lt;Kk¥oO1o•ŸR|–?U¸@¥òg
+5}IÃã¸ÀM?�&lt;E/–ï(&lt;­áGé|ù�Â39®•y¨iùÔ´|jZ&gt;5-Ÿš–OMË§¦òÙ7—Âh8ğÜ^bn\n·VÖ¯˜Ë¾c'ƒ°ïÙ8l˜‹óó­�tÒşšã¦¾5¸æb/ì›ÍÆBóêÀê:�5¸e†;Çx¨›—ï¦×wiÍ½D!E4¤yäRMoÒ]¦6J\¡uºy™|rÈÆÙ Ö}XÚêfû"Íã[€}'Ö6k¸áùdáÖ5HŠqÎ÷M4Z7štZ‹º8ÄîÎBÚù—9Ô�.áÔ£›˜}Ä}EÎÙ2\UŒl"|&gt;ÎÄ4¡gO‰T±œbç&lt;†ØSØ;ØpâZ³.ÄÊşX'X9ƒ®ØER1{°`ÍQ"á6»i+�’-ñ	;¬9ã[Ûâƒ£s¾ÔÃ·ò¬²±D�u]ÎaVC},çŞ&amp;±‰ÜÅæ¸.|±¿7Tä&lt;ÊÑ
+&lt;yÏ]aÉÆ:™±]U)[Û¨&amp;•7ïNd�ïø‚ÎÀşYìÜÛŠ—IŞ³ş+·‡Ş»ª{LyÙXzÍ&gt;²¾�TAıŸy]Ğz€+ÉjI$^$lZâ?«µÍ®TÊ/âa�g=ĞU�¼K¨Ö¬ª§�"YMÉöğ-3?léÃâa=Ê/thxÄ{şûğËÜ=œï¶0�½mO8�èyšÃ·+_CŞâÁîkHÌ 6	â07®°ÁÃÚ¼şøşÇ:A�l¾Öî8‘İO:§ZŸ·Îîœl�íUÓææjû—­p{äÎ¹Ó­¾êwş°¿o2_p¾Ü|¿İyıü»_ùÇázËEŞ19Äã,&amp;sóæØÇPu^&lt;f‡÷&gt;ıŸ ˆå
+endstream
+endobj
+16 0 obj
+1034
+endobj
+14 0 obj
+&lt;&lt; /Type /Font
+/Subtype /CIDFontType2
+/BaseFont /NSimSun
+/CIDSystemInfo &lt;&lt; /Registry (Adobe) /Ordering (Identity) /Supplement 0 &gt;&gt;
+/FontDescriptor 12 0 R
+/CIDToGIDMap /Identity
+/W [0 [992 496 ]
+]
+&gt;&gt;
+endobj
+15 0 obj
+&lt;&lt; /Length 368 &gt;&gt;
+stream
+/CIDInit /ProcSet findresource begin
+12 dict begin
+begincmap
+/CIDSystemInfo &lt;&lt; /Registry (Adobe) /Ordering (UCS) /Supplement 0 &gt;&gt; def
+/CMapName /Adobe-Identity-UCS def
+/CMapType 2 def
+1 begincodespacerange
+&lt;0000&gt; &lt;FFFF&gt;
+endcodespacerange
+2 beginbfrange
+&lt;0000&gt; &lt;0000&gt; &lt;0000&gt;
+&lt;0001&gt; &lt;0001&gt; &lt;0020&gt;
+endbfrange
+endcmap
+CMapName currentdict /CMap defineresource pop
+end
+end
+
+endstream
+endobj
+6 0 obj
+&lt;&lt; /Type /Font
+/Subtype /Type0
+/BaseFont /NSimSun
+/Encoding /Identity-H
+/DescendantFonts [14 0 R]
+/ToUnicode 15 0 R&gt;&gt;
+endobj
+2 0 obj
+&lt;&lt;
+/Type /Pages
+/Kids 
+[
+5 0 R
+]
+/Count 1
+/ProcSet [/PDF /Text /ImageB /ImageC]
+&gt;&gt;
+endobj
+xref
+0 17
+0000000000 65535 f 
+0000000009 00000 n 
+0000003769 00000 n 
+0000000179 00000 n 
+0000000274 00000 n 
+0000000360 00000 n 
+0000003636 00000 n 
+0000000311 00000 n 
+0000000666 00000 n 
+0000001585 00000 n 
+0000000480 00000 n 
+0000000646 00000 n 
+0000001604 00000 n 
+0000001855 00000 n 
+0000003001 00000 n 
+0000003216 00000 n 
+0000002980 00000 n 
+trailer
+&lt;&lt;
+/Size 17
+/Info 1 0 R
+/Root 7 0 R
+&gt;&gt;
+startxref
+3867
+%%EOF
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>Mission.Tchpad_test.BaseTchTest</td>
+    <td>18</td>
+    <td>18</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c5',18)">Detail</a></td>
+</tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.1')" >
+        pass</a>
+    <div id='div_pt5.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.1: {"code":200,"msg":"","data":{"unreadMsg":1,"unfinishMission":0,"unfinishTask":0,"issueCount":1},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.2')" >
+        pass</a>
+    <div id='div_pt5.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.2: {"code":200,"msg":"","data":[{"id":1,"name":"单选题","topicType":1,"topicStatus":1},{"id":2,"name":"填空题","topicType":2,"topicStatus":1},{"id":3,"name":"判断题","topicType":3,"topicStatus":1},{"id":4,"name":"多选题","topicType":4,"topicStatus":1},{"id":5,"name":"简答题","topicType":5,"topicStatus":1}],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.3')" >
+        pass</a>
+    <div id='div_pt5.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.3: {"code":200,"msg":"","data":[{"id":2062,"name":"语音","parentId":0,"childrens":[{"id":2063,"name":"音素、音标和音节","parentId":0,"childrens":[]},{"id":2064,"name":"字母及字母组合","parentId":0,"childrens":[{"id":2065,"name":"字母书写","parentId":0,"childrens":[]},{"id":2066,"name":"字母读音及在单词中的读音规则","parentId":0,"childrens":[]}]},{"id":2070,"name":"单词读音","parentId":0,"childrens":[]}]},{"id":2071,"name":"词法","parentId":0,"childrens":[{"id":2072,"name":"名词","parentId":0,"childrens":[{"id":2073,"name":"名词辨析","parentId":0,"childrens":[]},{"id":2074,"name":"普通名词","parentId":0,"childrens":[]},{"id":2077,"name":"专有名词","parentId":0,"childrens":[]},{"id":2078,"name":"名词所有格","parentId":0,"childrens":[]}]},{"id":2079,"name":"代词","parentId":0,"childrens":[{"id":2080,"name":"代词辨析","parentId":0,"childrens":[]},{"id":2081,"name":"人称代词","parentId":0,"childrens":[]},{"id":2082,"name":"物主代词","parentId":0,"childrens":[]},{"id":2083,"name":"反身代词","parentId":0,"childrens":[]},{"id":2084,"name":"指示代词","parentId":0,"childrens":[]},{"id":2085,"name":"不定代词","parentId":0,"childrens":[]},{"id":2086,"name":"疑问代词","parentId":0,"childrens":[]}]},{"id":2087,"name":"数词","parentId":0,"childrens":[{"id":2088,"name":"基数词","parentId":0,"childrens":[]},{"id":2089,"name":"序数词","parentId":0,"childrens":[]},{"id":2090,"name":"分数/小数/百分数和倍数","parentId":0,"childrens":[]},{"id":2091,"name":"量词","parentId":0,"childrens":[]}]},{"id":2092,"name":"介词和介词短语","parentId":0,"childrens":[]},{"id":2093,"name":"连词和感叹词","parentId":0,"childrens":[]},{"id":2094,"name":"形容词","parentId":0,"childrens":[{"id":2095,"name":"形容词辨析","parentId":0,"childrens":[]},{"id":2096,"name":"比较级","parentId":0,"childrens":[]},{"id":2097,"name":"最高级","parentId":0,"childrens":[]},{"id":2098,"name":"-ing形容词和-ed形容词","parentId":0,"childrens":[]}]},{"id":2099,"name":"副词","parentId":0,"childrens":[{"id":2100,"name":"副词辨析","parentId":0,"childrens":[]},{"id":2101,"name":"副词的分类","parentId":0,"childrens":[]},{"id":2102,"name":"比较级","parentId":0,"childrens":[]},{"id":2103,"name":"最高级","parentId":0,"childrens":[]}]},{"id":2104,"name":"冠词","parentId":0,"childrens":[{"id":2105,"name":"定冠词","parentId":0,"childrens":[]},{"id":2106,"name":"不定冠词","parentId":0,"childrens":[]},{"id":2107,"name":"零冠词","parentId":0,"childrens":[]}]},{"id":2108,"name":"动词","parentId":0,"childrens":[{"id":2109,"name":"动词辨析","parentId":0,"childrens":[]},{"id":2110,"name":"动词基本形式","parentId":0,"childrens":[]},{"id":2111,"name":"及物动词和不及物动词","parentId":0,"childrens":[]},{"id":2112,"name":"系动词","parentId":0,"childrens":[]},{"id":2113,"name":"助动词","parentId":0,"childrens":[]},{"id":2114,"name":"情态动词","parentId":0,"childrens":[]},{"id":2115,"name":"动词短语辨析","parentId":0,"childrens":[]},{"id":2116,"name":"非谓语动词","parentId":0,"childrens":[]},{"id":2120,"name":"时态","parentId":0,"childrens":[]},{"id":2130,"name":"被动语态","parentId":0,"childrens":[]},{"id":2131,"name":"虚拟语气","parentId":0,"childrens":[]}]},{"id":2132,"name":"构词法","parentId":0,"childrens":[{"id":2133,"name":"派生法","parentId":0,"childrens":[]},{"id":2134,"name":"转化法","parentId":0,"childrens":[]},{"id":2135,"name":"合成法","parentId":0,"childrens":[]}]}]},{"id":2136,"name":"句法","parentId":0,"childrens":[{"id":2137,"name":"句子与句子成分","parentId":0,"childrens":[{"id":2138,"name":"句子成分","parentId":0,"childrens":[]},{"id":2139,"name":"基本句型","parentId":0,"childrens":[]},{"id":2140,"name":"句子种类","parentId":0,"childrens":[]},{"id":2145,"name":"句子结构","parentId":0,"childrens":[]}]},{"id":2149,"name":"状语从句","parentId":0,"childrens":[{"id":2150,"name":"时间状语从句","parentId":0,"childrens":[]},{"id":2151,"name":"地点状语从句","parentId":0,"childrens":[]},{"id":2152,"name":"原因状语从句","parentId":0,"childrens":[]},{"id":2153,"name":"目的状语从句","parentId":0,"childrens":[]},{"id":2154,"name":"结果状语从句","parentId":0,"childrens":[]},{"id":2155,"name":"条件状语从句","parentId":0,"childrens":[]},{"id":2156,"name":"让步状语从句","parentId":0,"childrens":[]},{"id":2157,"name":"比较状语从句","parentId":0,"childrens":[]},{"id":2158,"name":"方式状语从句","parentId":0,"childrens":[]}]},{"id":2159,"name":"宾语从句","parentId":0,"childrens":[{"id":2160,"name":"宾语从句的连接词","parentId":0,"childrens":[]},{"id":2161,"name":"宾语从句的时态","parentId":0,"childrens":[]},{"id":2162,"name":"宾语从句的语序","parentId":0,"childrens":[]}]},{"id":2163,"name":"直接引语和间接引语","parentId":0,"childrens":[]},{"id":2164,"name":"定语从句","parentId":0,"childrens":[{"id":2165,"name":"定语从句的分类","parentId":0,"childrens":[]},{"id":2168,"name":"定语从句的先行词","parentId":0,"childrens":[]},{"id":2169,"name":"关系代词的用法","parentId":0,"childrens":[]},{"id":2170,"name":"关系副词的用法","parentId":0,"childrens":[]}]},{"id":2171,"name":"特殊句式","parentId":0,"childrens":[{"id":2172,"name":"there be结构","parentId":0,"childrens":[]},{"id":2173,"name":"倒装句","parentId":0,"childrens":[]},{"id":2174,"name":"强调句","parentId":0,"childrens":[]},{"id":2175,"name":"省略句","parentId":0,"childrens":[]}]},{"id":2176,"name":"主谓一致","parentId":0,"childrens":[{"id":2177,"name":"语法一致原则","parentId":0,"childrens":[]},{"id":2178,"name":"意义一致原则","parentId":0,"childrens":[]},{"id":2179,"name":"就近一致原则","parentId":0,"childrens":[]}]}]},{"id":2180,"name":"完形填空","parentId":0,"childrens":[{"id":2181,"name":"体裁","parentId":0,"childrens":[{"id":2182,"name":"记叙文","parentId":0,"childrens":[]},{"id":2183,"name":"应用文","parentId":0,"childrens":[]},{"id":2184,"name":"说明文","parentId":0,"childrens":[]},{"id":2185,"name":"议论文","parentId":0,"childrens":[]},{"id":2186,"name":"夹叙夹议文","parentId":0,"childrens":[]},{"id":2187,"name":"其他","parentId":0,"childrens":[]}]},{"id":2188,"name":"题材","parentId":0,"childrens":[{"id":2189,"name":"日常生活类","parentId":0,"childrens":[]},{"id":2190,"name":"人生百味类","parentId":0,"childrens":[]},{"id":2191,"name":"科普环保类","parentId":0,"childrens":[]},{"id":2192,"name":"政治经济文化类","parentId":0,"childrens":[]},{"id":2193,"name":"人物传纪/故事阅读类","parentId":0,"childrens":[]},{"id":2194,"name":"教育类","parentId":0,"childrens":[]},{"id":2195,"name":"广告布告类","parentId":0,"childrens":[]},{"id":2196,"name":"健康保健类","parentId":0,"childrens":[]},{"id":2197,"name":"社会现象类","parentId":0,"childrens":[]},{"id":2198,"name":"新闻报道类","parentId":0,"childrens":[]},{"id":2199,"name":"社会历史类","parentId":0,"childrens":[]},{"id":2200,"name":"其他类","parentId":0,"childrens":[]}]},{"id":2201,"name":"考查类型","parentId":0,"childrens":[{"id":2202,"name":"词义辨析","parentId":0,"childrens":[]},{"id":2203,"name":"短语辨析","parentId":0,"childrens":[]},{"id":2204,"name":"固定句型","parentId":0,"childrens":[]},{"id":2205,"name":"基础语法","parentId":0,"childrens":[]},{"id":2206,"name":"固定搭配","parentId":0,"childrens":[]},{"id":2207,"name":"习惯表达","parentId":0,"childrens":[]},{"id":2208,"name":"逻辑推理","parentId":0,"childrens":[]},{"id":2209,"name":"客观事实","parentId":0,"childrens":[]},{"id":2210,"name":"其他","parentId":0,"childrens":[]}]}]},{"id":2211,"name":"阅读理解","parentId":0,"childrens":[{"id":2212,"name":"体裁","parentId":0,"childrens":[{"id":2213,"name":"记叙文","parentId":0,"childrens":[]},{"id":2214,"name":"应用文","parentId":0,"childrens":[]},{"id":2215,"name":"说明文","parentId":0,"childrens":[]},{"id":2216,"name":"议论文","parentId":0,"childrens":[]},{"id":2217,"name":"夹叙夹议文","parentId":0,"childrens":[]},{"id":2218,"name":"其他","parentId":0,"childrens":[]}]},{"id":2219,"name":"题材","parentId":0,"childrens":[{"id":2220,"name":"日常生活类","parentId":0,"childrens":[]},{"id":2221,"name":"人生感悟类","parentId":0,"childrens":[]},{"id":2222,"name":"科普环保类","parentId":0,"childrens":[]},{"id":2223,"name":"政治经济类","parentId":0,"childrens":[]},{"id":2224,"name":"人物传纪/故事阅读类","parentId":0,"childrens":[]},{"id":2225,"name":"教育科学类","parentId":0,"childrens":[]},{"id":2226,"name":"广告布告类","parentId":0,"childrens":[]},{"id":2227,"name":"健康环保类","parentId":0,"childrens":[]},{"id":2228,"name":"社会现象类","parentId":0,"childrens":[]},{"id":2229,"name":"新闻报道类","parentId":0,"childrens":[]},{"id":2230,"name":"历史文化类","parentId":0,"childrens":[]},{"id":2231,"name":"其他类","parentId":0,"childrens":[]}]},{"id":2232,"name":"考查类型","parentId":0,"childrens":[{"id":2233,"name":"细节理解","parentId":0,"childrens":[]},{"id":2234,"name":"推理判断","parentId":0,"childrens":[]},{"id":2235,"name":"词句猜测","parentId":0,"childrens":[]},{"id":2236,"name":"观点态度","parentId":0,"childrens":[]},{"id":2237,"name":"篇章结构","parentId":0,"childrens":[]},{"id":2238,"name":"主旨大意","parentId":0,"childrens":[]},{"id":2239,"name":"段落大意","parentId":0,"childrens":[]},{"id":2240,"name":"标题判断","parentId":0,"childrens":[]},{"id":2241,"name":"客观事实","parentId":0,"childrens":[]},{"id":2242,"name":"数字计算","parentId":0,"childrens":[]},{"id":2243,"name":"其他","parentId":0,"childrens":[]}]}]},{"id":2244,"name":"听力","parentId":0,"childrens":[{"id":2245,"name":"单词","parentId":0,"childrens":[]},{"id":2246,"name":"句子","parentId":0,"childrens":[]},{"id":2247,"name":"对话","parentId":0,"childrens":[{"id":2248,"name":"短对话","parentId":0,"childrens":[]},{"id":2249,"name":"长对话","parentId":0,"childrens":[]}]},{"id":2250,"name":"短文","parentId":0,"childrens":[{"id":2251,"name":"单项选择","parentId":0,"childrens":[]},{"id":2252,"name":"补全信息","parentId":0,"childrens":[]},{"id":2253,"name":"判断正误","parentId":0,"childrens":[]},{"id":2254,"name":"其他","parentId":0,"childrens":[]}]}]},{"id":2255,"name":"翻译","parentId":0,"childrens":[{"id":2256,"name":"英译汉","parentId":0,"childrens":[]},{"id":2257,"name":"汉译英","parentId":0,"childrens":[]}]},{"id":2258,"name":"情景交际","parentId":0,"childrens":[]},{"id":2259,"name":"写作表达","parentId":0,"childrens":[{"id":2260,"name":"提纲作文","parentId":0,"childrens":[]},{"id":2261,"name":"图表作文","parentId":0,"childrens":[]},{"id":2262,"name":"图画作文","parentId":0,"childrens":[]},{"id":2263,"name":"话题作文","parentId":0,"childrens":[]},{"id":2264,"name":"命题作文","parentId":0,"childrens":[]},{"id":2265,"name":"应用文作文","parentId":0,"childrens":[]}]},{"id":2266,"name":"其他题型","parentId":0,"childrens":[{"id":2267,"name":"单词拼写/填空","parentId":0,"childrens":[]},{"id":2268,"name":"连词成句/单词造句","parentId":0,"childrens":[]},{"id":2269,"name":"补全句子/对话","parentId":0,"childrens":[]},{"id":2270,"name":"句型转换","parentId":0,"childrens":[]},{"id":2271,"name":"信息匹配","parentId":0,"childrens":[]},{"id":2272,"name":"判断正误","parentId":0,"childrens":[]},{"id":2273,"name":"短文填空","parentId":0,"childrens":[]},{"id":2274,"name":"问答题","parentId":0,"childrens":[]},{"id":2275,"name":"任务型阅读","parentId":0,"childrens":[]}]}],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.4')" >
+        pass</a>
+    <div id='div_pt5.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.4: {"code":200,"msg":"","data":[{"id":13410,"bookName":"七年级上册"},{"id":13420,"bookName":"七年级下册"},{"id":13433,"bookName":"八年级上册"},{"id":13444,"bookName":"八年级下册"},{"id":13455,"bookName":"九年级全一册"}],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_05</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.5')" >
+        pass</a>
+    <div id='div_pt5.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.5: {"code":200,"msg":"","data":{"difficults":[{"id":5,"name":"容易","weight":1.0},{"id":1,"name":"较易","weight":2.0},{"id":2,"name":"一般","weight":3.0},{"id":3,"name":"较难","weight":4.0},{"id":4,"name":"困难","weight":5.0}],"types":[{"id":61,"questionTypeName":"听力-单选题"},{"id":62,"questionTypeName":"听力-完形填空"},{"id":63,"questionTypeName":"字母"},{"id":64,"questionTypeName":"单词拼写/单词释义"},{"id":65,"questionTypeName":"单选题"},{"id":66,"questionTypeName":"看图填空"},{"id":67,"questionTypeName":"单词造句"},{"id":68,"questionTypeName":"补全对话"},{"id":69,"questionTypeName":"完形填空"},{"id":70,"questionTypeName":"阅读理解"},{"id":71,"questionTypeName":"任务型阅读-简答"},{"id":72,"questionTypeName":"阅读判断"},{"id":73,"questionTypeName":"任务型阅读-完成表格"},{"id":74,"questionTypeName":"任务型阅读"},{"id":75,"questionTypeName":"信息匹配"},{"id":76,"questionTypeName":"首字母短文填空"},{"id":77,"questionTypeName":"阅读填空"},{"id":78,"questionTypeName":"选词填空-短文"},{"id":79,"questionTypeName":"选词填空-句子"},{"id":80,"questionTypeName":"单词拼写-单句"},{"id":81,"questionTypeName":"单句语法填空"},{"id":82,"questionTypeName":"短文改错"},{"id":83,"questionTypeName":"句型转换"},{"id":84,"questionTypeName":"单句改错"},{"id":85,"questionTypeName":"完成句子"},{"id":86,"questionTypeName":"句子翻译"},{"id":87,"questionTypeName":"书面表达"},{"id":88,"questionTypeName":"其他"}]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_06</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.6')" >
+        pass</a>
+    <div id='div_pt5.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.6: {"code":200,"msg":"","data":[{"id":2062,"name":"语音","parentId":0,"childrens":[{"id":2063,"name":"音素、音标和音节","parentId":0,"childrens":[]},{"id":2064,"name":"字母及字母组合","parentId":0,"childrens":[{"id":2065,"name":"字母书写","parentId":0,"childrens":[]},{"id":2066,"name":"字母读音及在单词中的读音规则","parentId":0,"childrens":[]}]},{"id":2070,"name":"单词读音","parentId":0,"childrens":[]}]},{"id":2071,"name":"词法","parentId":0,"childrens":[{"id":2072,"name":"名词","parentId":0,"childrens":[{"id":2073,"name":"名词辨析","parentId":0,"childrens":[]},{"id":2074,"name":"普通名词","parentId":0,"childrens":[]},{"id":2077,"name":"专有名词","parentId":0,"childrens":[]},{"id":2078,"name":"名词所有格","parentId":0,"childrens":[]}]},{"id":2079,"name":"代词","parentId":0,"childrens":[{"id":2080,"name":"代词辨析","parentId":0,"childrens":[]},{"id":2081,"name":"人称代词","parentId":0,"childrens":[]},{"id":2082,"name":"物主代词","parentId":0,"childrens":[]},{"id":2083,"name":"反身代词","parentId":0,"childrens":[]},{"id":2084,"name":"指示代词","parentId":0,"childrens":[]},{"id":2085,"name":"不定代词","parentId":0,"childrens":[]},{"id":2086,"name":"疑问代词","parentId":0,"childrens":[]}]},{"id":2087,"name":"数词","parentId":0,"childrens":[{"id":2088,"name":"基数词","parentId":0,"childrens":[]},{"id":2089,"name":"序数词","parentId":0,"childrens":[]},{"id":2090,"name":"分数/小数/百分数和倍数","parentId":0,"childrens":[]},{"id":2091,"name":"量词","parentId":0,"childrens":[]}]},{"id":2092,"name":"介词和介词短语","parentId":0,"childrens":[]},{"id":2093,"name":"连词和感叹词","parentId":0,"childrens":[]},{"id":2094,"name":"形容词","parentId":0,"childrens":[{"id":2095,"name":"形容词辨析","parentId":0,"childrens":[]},{"id":2096,"name":"比较级","parentId":0,"childrens":[]},{"id":2097,"name":"最高级","parentId":0,"childrens":[]},{"id":2098,"name":"-ing形容词和-ed形容词","parentId":0,"childrens":[]}]},{"id":2099,"name":"副词","parentId":0,"childrens":[{"id":2100,"name":"副词辨析","parentId":0,"childrens":[]},{"id":2101,"name":"副词的分类","parentId":0,"childrens":[]},{"id":2102,"name":"比较级","parentId":0,"childrens":[]},{"id":2103,"name":"最高级","parentId":0,"childrens":[]}]},{"id":2104,"name":"冠词","parentId":0,"childrens":[{"id":2105,"name":"定冠词","parentId":0,"childrens":[]},{"id":2106,"name":"不定冠词","parentId":0,"childrens":[]},{"id":2107,"name":"零冠词","parentId":0,"childrens":[]}]},{"id":2108,"name":"动词","parentId":0,"childrens":[{"id":2109,"name":"动词辨析","parentId":0,"childrens":[]},{"id":2110,"name":"动词基本形式","parentId":0,"childrens":[]},{"id":2111,"name":"及物动词和不及物动词","parentId":0,"childrens":[]},{"id":2112,"name":"系动词","parentId":0,"childrens":[]},{"id":2113,"name":"助动词","parentId":0,"childrens":[]},{"id":2114,"name":"情态动词","parentId":0,"childrens":[]},{"id":2115,"name":"动词短语辨析","parentId":0,"childrens":[]},{"id":2116,"name":"非谓语动词","parentId":0,"childrens":[]},{"id":2120,"name":"时态","parentId":0,"childrens":[]},{"id":2130,"name":"被动语态","parentId":0,"childrens":[]},{"id":2131,"name":"虚拟语气","parentId":0,"childrens":[]}]},{"id":2132,"name":"构词法","parentId":0,"childrens":[{"id":2133,"name":"派生法","parentId":0,"childrens":[]},{"id":2134,"name":"转化法","parentId":0,"childrens":[]},{"id":2135,"name":"合成法","parentId":0,"childrens":[]}]}]},{"id":2136,"name":"句法","parentId":0,"childrens":[{"id":2137,"name":"句子与句子成分","parentId":0,"childrens":[{"id":2138,"name":"句子成分","parentId":0,"childrens":[]},{"id":2139,"name":"基本句型","parentId":0,"childrens":[]},{"id":2140,"name":"句子种类","parentId":0,"childrens":[]},{"id":2145,"name":"句子结构","parentId":0,"childrens":[]}]},{"id":2149,"name":"状语从句","parentId":0,"childrens":[{"id":2150,"name":"时间状语从句","parentId":0,"childrens":[]},{"id":2151,"name":"地点状语从句","parentId":0,"childrens":[]},{"id":2152,"name":"原因状语从句","parentId":0,"childrens":[]},{"id":2153,"name":"目的状语从句","parentId":0,"childrens":[]},{"id":2154,"name":"结果状语从句","parentId":0,"childrens":[]},{"id":2155,"name":"条件状语从句","parentId":0,"childrens":[]},{"id":2156,"name":"让步状语从句","parentId":0,"childrens":[]},{"id":2157,"name":"比较状语从句","parentId":0,"childrens":[]},{"id":2158,"name":"方式状语从句","parentId":0,"childrens":[]}]},{"id":2159,"name":"宾语从句","parentId":0,"childrens":[{"id":2160,"name":"宾语从句的连接词","parentId":0,"childrens":[]},{"id":2161,"name":"宾语从句的时态","parentId":0,"childrens":[]},{"id":2162,"name":"宾语从句的语序","parentId":0,"childrens":[]}]},{"id":2163,"name":"直接引语和间接引语","parentId":0,"childrens":[]},{"id":2164,"name":"定语从句","parentId":0,"childrens":[{"id":2165,"name":"定语从句的分类","parentId":0,"childrens":[]},{"id":2168,"name":"定语从句的先行词","parentId":0,"childrens":[]},{"id":2169,"name":"关系代词的用法","parentId":0,"childrens":[]},{"id":2170,"name":"关系副词的用法","parentId":0,"childrens":[]}]},{"id":2171,"name":"特殊句式","parentId":0,"childrens":[{"id":2172,"name":"there be结构","parentId":0,"childrens":[]},{"id":2173,"name":"倒装句","parentId":0,"childrens":[]},{"id":2174,"name":"强调句","parentId":0,"childrens":[]},{"id":2175,"name":"省略句","parentId":0,"childrens":[]}]},{"id":2176,"name":"主谓一致","parentId":0,"childrens":[{"id":2177,"name":"语法一致原则","parentId":0,"childrens":[]},{"id":2178,"name":"意义一致原则","parentId":0,"childrens":[]},{"id":2179,"name":"就近一致原则","parentId":0,"childrens":[]}]}]},{"id":2180,"name":"完形填空","parentId":0,"childrens":[{"id":2181,"name":"体裁","parentId":0,"childrens":[{"id":2182,"name":"记叙文","parentId":0,"childrens":[]},{"id":2183,"name":"应用文","parentId":0,"childrens":[]},{"id":2184,"name":"说明文","parentId":0,"childrens":[]},{"id":2185,"name":"议论文","parentId":0,"childrens":[]},{"id":2186,"name":"夹叙夹议文","parentId":0,"childrens":[]},{"id":2187,"name":"其他","parentId":0,"childrens":[]}]},{"id":2188,"name":"题材","parentId":0,"childrens":[{"id":2189,"name":"日常生活类","parentId":0,"childrens":[]},{"id":2190,"name":"人生百味类","parentId":0,"childrens":[]},{"id":2191,"name":"科普环保类","parentId":0,"childrens":[]},{"id":2192,"name":"政治经济文化类","parentId":0,"childrens":[]},{"id":2193,"name":"人物传纪/故事阅读类","parentId":0,"childrens":[]},{"id":2194,"name":"教育类","parentId":0,"childrens":[]},{"id":2195,"name":"广告布告类","parentId":0,"childrens":[]},{"id":2196,"name":"健康保健类","parentId":0,"childrens":[]},{"id":2197,"name":"社会现象类","parentId":0,"childrens":[]},{"id":2198,"name":"新闻报道类","parentId":0,"childrens":[]},{"id":2199,"name":"社会历史类","parentId":0,"childrens":[]},{"id":2200,"name":"其他类","parentId":0,"childrens":[]}]},{"id":2201,"name":"考查类型","parentId":0,"childrens":[{"id":2202,"name":"词义辨析","parentId":0,"childrens":[]},{"id":2203,"name":"短语辨析","parentId":0,"childrens":[]},{"id":2204,"name":"固定句型","parentId":0,"childrens":[]},{"id":2205,"name":"基础语法","parentId":0,"childrens":[]},{"id":2206,"name":"固定搭配","parentId":0,"childrens":[]},{"id":2207,"name":"习惯表达","parentId":0,"childrens":[]},{"id":2208,"name":"逻辑推理","parentId":0,"childrens":[]},{"id":2209,"name":"客观事实","parentId":0,"childrens":[]},{"id":2210,"name":"其他","parentId":0,"childrens":[]}]}]},{"id":2211,"name":"阅读理解","parentId":0,"childrens":[{"id":2212,"name":"体裁","parentId":0,"childrens":[{"id":2213,"name":"记叙文","parentId":0,"childrens":[]},{"id":2214,"name":"应用文","parentId":0,"childrens":[]},{"id":2215,"name":"说明文","parentId":0,"childrens":[]},{"id":2216,"name":"议论文","parentId":0,"childrens":[]},{"id":2217,"name":"夹叙夹议文","parentId":0,"childrens":[]},{"id":2218,"name":"其他","parentId":0,"childrens":[]}]},{"id":2219,"name":"题材","parentId":0,"childrens":[{"id":2220,"name":"日常生活类","parentId":0,"childrens":[]},{"id":2221,"name":"人生感悟类","parentId":0,"childrens":[]},{"id":2222,"name":"科普环保类","parentId":0,"childrens":[]},{"id":2223,"name":"政治经济类","parentId":0,"childrens":[]},{"id":2224,"name":"人物传纪/故事阅读类","parentId":0,"childrens":[]},{"id":2225,"name":"教育科学类","parentId":0,"childrens":[]},{"id":2226,"name":"广告布告类","parentId":0,"childrens":[]},{"id":2227,"name":"健康环保类","parentId":0,"childrens":[]},{"id":2228,"name":"社会现象类","parentId":0,"childrens":[]},{"id":2229,"name":"新闻报道类","parentId":0,"childrens":[]},{"id":2230,"name":"历史文化类","parentId":0,"childrens":[]},{"id":2231,"name":"其他类","parentId":0,"childrens":[]}]},{"id":2232,"name":"考查类型","parentId":0,"childrens":[{"id":2233,"name":"细节理解","parentId":0,"childrens":[]},{"id":2234,"name":"推理判断","parentId":0,"childrens":[]},{"id":2235,"name":"词句猜测","parentId":0,"childrens":[]},{"id":2236,"name":"观点态度","parentId":0,"childrens":[]},{"id":2237,"name":"篇章结构","parentId":0,"childrens":[]},{"id":2238,"name":"主旨大意","parentId":0,"childrens":[]},{"id":2239,"name":"段落大意","parentId":0,"childrens":[]},{"id":2240,"name":"标题判断","parentId":0,"childrens":[]},{"id":2241,"name":"客观事实","parentId":0,"childrens":[]},{"id":2242,"name":"数字计算","parentId":0,"childrens":[]},{"id":2243,"name":"其他","parentId":0,"childrens":[]}]}]},{"id":2244,"name":"听力","parentId":0,"childrens":[{"id":2245,"name":"单词","parentId":0,"childrens":[]},{"id":2246,"name":"句子","parentId":0,"childrens":[]},{"id":2247,"name":"对话","parentId":0,"childrens":[{"id":2248,"name":"短对话","parentId":0,"childrens":[]},{"id":2249,"name":"长对话","parentId":0,"childrens":[]}]},{"id":2250,"name":"短文","parentId":0,"childrens":[{"id":2251,"name":"单项选择","parentId":0,"childrens":[]},{"id":2252,"name":"补全信息","parentId":0,"childrens":[]},{"id":2253,"name":"判断正误","parentId":0,"childrens":[]},{"id":2254,"name":"其他","parentId":0,"childrens":[]}]}]},{"id":2255,"name":"翻译","parentId":0,"childrens":[{"id":2256,"name":"英译汉","parentId":0,"childrens":[]},{"id":2257,"name":"汉译英","parentId":0,"childrens":[]}]},{"id":2258,"name":"情景交际","parentId":0,"childrens":[]},{"id":2259,"name":"写作表达","parentId":0,"childrens":[{"id":2260,"name":"提纲作文","parentId":0,"childrens":[]},{"id":2261,"name":"图表作文","parentId":0,"childrens":[]},{"id":2262,"name":"图画作文","parentId":0,"childrens":[]},{"id":2263,"name":"话题作文","parentId":0,"childrens":[]},{"id":2264,"name":"命题作文","parentId":0,"childrens":[]},{"id":2265,"name":"应用文作文","parentId":0,"childrens":[]}]},{"id":2266,"name":"其他题型","parentId":0,"childrens":[{"id":2267,"name":"单词拼写/填空","parentId":0,"childrens":[]},{"id":2268,"name":"连词成句/单词造句","parentId":0,"childrens":[]},{"id":2269,"name":"补全句子/对话","parentId":0,"childrens":[]},{"id":2270,"name":"句型转换","parentId":0,"childrens":[]},{"id":2271,"name":"信息匹配","parentId":0,"childrens":[]},{"id":2272,"name":"判断正误","parentId":0,"childrens":[]},{"id":2273,"name":"短文填空","parentId":0,"childrens":[]},{"id":2274,"name":"问答题","parentId":0,"childrens":[]},{"id":2275,"name":"任务型阅读","parentId":0,"childrens":[]}]}],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_07</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.7')" >
+        pass</a>
+    <div id='div_pt5.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.7: {"code":200,"msg":"","data":{"pageIndex":1,"pageSize":10,"pageCount":2,"count":11,"list":[{"quesId":"d8ca8ee8de924fdf915ddff00ac544ef","subjectId":19,"quesTypeId":0,"diffVal":4,"quesScore":2.0,"quesCount":1,"mate":[],"quesVersion":"v1","year":"2018","grade":null,"section":{"sectId":85,"sectName":"完成句子"},"squestion":[{"squesId":"ba995a380e14447186dd8042576c43ce","squesScore":2.0,"squesStem":"&lt;span class=\"wjdu-NO-znyin\"&gt;&lt;/span&gt;&lt;p&gt; 昨天我打羽毛球了。&lt;/p&gt; &lt;p&gt;I __________ __________ yesterday.&lt;/p&gt;","squesSerno":"1","squesStemStr":null,"option":null}],"analyze":null},{"quesId":"7755da42857f416eaf4eb28fdf4e9d2c","subjectId":19,"quesTypeId":0,"diffVal":3,"quesScore":1.0,"quesCount":1,"mate":[],"quesVersion":"v1","year":"2018","grade":null,"section":{"sectId":65,"sectName":"单选题"},"squestion":[{"squesId":"ae1adfa73a344c90a403ba93c45bda8b","squesScore":1.0,"squesStem":"&lt;span class=\"wjdu-NO-znyin\"&gt;&lt;/span&gt;&lt;p&gt;Pandas are very ________ and ________. We all like them.&lt;/p&gt; &lt;p&gt;&lt;/p&gt;&lt;div style=\"overflow:auto;width:auto;\"&gt;&lt;table class=\"tablestyle\"&gt;&lt;tr&gt;&lt;td abbr=\"_option_A\" class=\"td25\"&gt;A.&amp;nbsp;friendly; lazy&lt;/td&gt;&lt;td abbr=\"_option_B\" class=\"td25\"&gt;B.&amp;nbsp;cute; scary  &lt;/td&gt;&lt;td abbr=\"_option_C\" class=\"td25\"&gt;C.&amp;nbsp;dangerous; beautiful&lt;/td&gt;&lt;td abbr=\"_option_D\" class=\"tde\"&gt;D.&amp;nbsp;shy; smart &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;","squesSerno":"1","squesStemStr":null,"option":[{"squesId":0,"optId":6959261,"optIndex":"A","optDesc":"friendly; lazy"},{"squesId":0,"optId":6959262,"optIndex":"B","optDesc":"cute; scary"},{"squesId":0,"optId":6959263,"optIndex":"C","optDesc":"dangerous; beautiful"},{"squesId":0,"optId":6959264,"optIndex":"D","optDesc":"shy; smart"}]}],"analyze":null},{"quesId":"50677eb4f88c470483183ee9fd58a75c","subjectId":19,"quesTypeId":0,"diffVal":3,"quesScore":1.0,"quesCount":1,"mate":[],"quesVersion":"v1","year":"2016","grade":null,"section":{"sectId":65,"sectName":"单选题"},"squestion":[{"squesId":"ceb60f80e48b43c0aec0ae0bc6e0ceb5","squesScore":1.0,"squesStem":"&lt;span class=\"wjdu-NO-znyin\"&gt;&lt;/span&gt;My parents told me \n&lt;u&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/u&gt;alone.&lt;div style=\"overflow:auto;width:auto;\"&gt;&lt;table class=\"tablestyle\"&gt;&lt;tr&gt;&lt;td abbr=\"_option_A\" class=\"td25\"&gt;A.&amp;nbsp;not to travel &amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td abbr=\"_option_B\" class=\"td25\"&gt;B.&amp;nbsp;not travel &amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td abbr=\"_option_C\" class=\"tde\"&gt;C.&amp;nbsp;to not travel&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;","squesSerno":"1","squesStemStr":null,"option":[{"squesId":0,"optId":7022388,"optIndex":"A","optDesc":"not to travel &amp;nbsp;&amp;nbsp;&amp;nbsp;"},{"squesId":0,"optId":7022389,"optIndex":"B","optDesc":"not travel &amp;nbsp;&amp;nbsp;&amp;nbsp;"},{"squesId":0,"optId":7022390,"optIndex":"C","optDesc":"to not travel"}]}],"analyze":null},{"quesId":"b8be4b265b9e410ba58ebdd5f04ed67c","subjectId":19,"quesTypeId":0,"diffVal":3,"quesScore":1.0,"quesCount":1,"mate":[],"quesVersion":"v1","year":"2018","grade":null,"section":{"sectId":65,"sectName":"单选题"},"squestion":[{"squesId":"c0e1de7395da45ee859e128788779425","squesScore":1.0,"squesStem":"&lt;span class=\"wjdu-NO-znyin\"&gt;&lt;/span&gt;&lt;p&gt; He doesn’t have a walk in the morning. And she doesn’t, _________.&lt;/p&gt; &lt;p&gt;&lt;/p&gt;&lt;div style=\"overflow:auto;width:auto;\"&gt;&lt;table class=\"tablestyle\"&gt;&lt;tr&gt;&lt;td abbr=\"_option_A\" class=\"td25\"&gt;A.&amp;nbsp;also&lt;/td&gt;&lt;td abbr=\"_option_B\" class=\"td25\"&gt;B.&amp;nbsp;then&lt;/td&gt;&lt;td abbr=\"_option_C\" class=\"td25\"&gt;C.&amp;nbsp;too&lt;/td&gt;&lt;td abbr=\"_option_D\" class=\"tde\"&gt;D.&amp;nbsp;either &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;","squesSerno":"1","squesStemStr":null,"option":[{"squesId":0,"optId":6946248,"optIndex":"A","optDesc":"also"},{"squesId":0,"optId":6946249,"optIndex":"B","optDesc":"then"},{"squesId":0,"optId":6946250,"optIndex":"C","optDesc":"too"},{"squesId":0,"optId":6946251,"optIndex":"D","optDesc":"either"}]}],"analyze":null},{"quesId":"cd2117d0383d41ec8d33ab70cbd25215","subjectId":19,"quesTypeId":0,"diffVal":5,"quesScore":1.0,"quesCount":1,"mate":[],"quesVersion":"v1","year":"2016","grade":null,"section":{"sectId":65,"sectName":"单选题"},"squestion":[{"squesId":"b6eca8eb820c412d8a42805166be9a0a","squesScore":1.0,"squesStem":"&lt;span class=\"wjdu-NO-znyin\"&gt;&lt;/span&gt;They saw the math teacher ______ the classroom just now.&lt;div style=\"overflow:auto;width:auto;\"&gt;&lt;table class=\"tablestyle\"&gt;&lt;tr&gt;&lt;td abbr=\"_option_A\" class=\"td25\"&gt;A.&amp;nbsp;enter&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td abbr=\"_option_B\" class=\"td25\"&gt;B.&amp;nbsp;to enter&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/td&gt;&lt;td abbr=\"_option_C\" class=\"td25\"&gt;C.&amp;nbsp;to leave&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td abbr=\"_option_D\" class=\"tde\"&gt;D.&amp;nbsp;arrive \n&lt;br /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;","squesSerno":"1","squesStemStr":null,"option":[{"squesId":0,"optId":6977278,"optIndex":"A","optDesc":"enter&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"},{"squesId":0,"optId":6977279,"optIndex":"B","optDesc":"to enter&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;"},{"squesId":0,"optId":6977280,"optIndex":"C","optDesc":"to leave&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"},{"squesId":0,"optId":6977281,"optIndex":"D","optDesc":"arrive \n&lt;br /&gt;"}]}],"analyze":null},{"quesId":"5248ccad344945f29c209257eb6134da","subjectId":19,"quesTypeId":0,"diffVal":2,"quesScore":1.0,"quesCount":1,"mate":[],"quesVersion":"v1","year":"2016","grade":null,"section":{"sectId":65,"sectName":"单选题"},"squestion":[{"squesId":"b79050f648f947c0857ce4677ad5112a","squesScore":1.0,"squesStem":"&lt;span class=\"wjdu-NO-znyin\"&gt;&lt;/span&gt;You will never guess ________.&lt;div style=\"overflow:auto;width:auto;\"&gt;&lt;table class=\"tablestyle\"&gt;&lt;tr&gt;&lt;td abbr=\"_option_A\" class=\"td50\"&gt;A.&amp;nbsp;who am I waiting for&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td abbr=\"_option_B\" class=\"td50\"&gt;B.&amp;nbsp;what has happened&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td abbr=\"_option_C\" class=\"td50\"&gt;C.&amp;nbsp;how can she help me&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td abbr=\"_option_D\" class=\"tde\"&gt;D.&amp;nbsp;where did I go&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;","squesSerno":"1","squesStemStr":null,"option":[{"squesId":0,"optId":7018811,"optIndex":"A","optDesc":"who am I waiting for&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"},{"squesId":0,"optId":7018812,"optIndex":"B","optDesc":"what has happened"},{"squesId":0,"optId":7018813,"optIndex":"C","optDesc":"how can she help me&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"},{"squesId":0,"optId":7018814,"optIndex":"D","optDesc":"where did I go"}]}],"analyze":null},{"quesId":"72108f9d10974edbbb0e354acb536552","subjectId":19,"quesTypeId":0,"diffVal":3,"quesScore":1.0,"quesCount":1,"mate":[],"quesVersion":"v1","year":"2016","grade":null,"section":{"sectId":65,"sectName":"单选题"},"squestion":[{"squesId":"ee7ffe8a3b224251b96b391b4635eb82","squesScore":1.0,"squesStem":"&lt;span class=\"wjdu-NO-znyin\"&gt;&lt;/span&gt;We________several meetings to discuss the plan of volunteers in the community since last week． \n&lt;br /&gt;&lt;div style=\"overflow:auto;width:auto;\"&gt;&lt;table class=\"tablestyle\"&gt;&lt;tr&gt;&lt;td abbr=\"_option_A\" class=\"td25\"&gt;A.&amp;nbsp;are having \n&lt;br /&gt;&lt;/td&gt;&lt;td abbr=\"_option_B\" class=\"td25\"&gt;B.&amp;nbsp;have had \n&lt;br /&gt;&lt;/td&gt;&lt;td abbr=\"_option_C\" class=\"td25\"&gt;C.&amp;nbsp;had \n&lt;br /&gt;&lt;/td&gt;&lt;td abbr=\"_option_D\" class=\"tde\"&gt;D.&amp;nbsp;have&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;","squesSerno":"1","squesStemStr":null,"option":[{"squesId":0,"optId":6944149,"optIndex":"A","optDesc":"are having \n&lt;br /&gt;"},{"squesId":0,"optId":6944150,"optIndex":"B","optDesc":"have had \n&lt;br /&gt;"},{"squesId":0,"optId":6944151,"optIndex":"C","optDesc":"had \n&lt;br /&gt;"},{"squesId":0,"optId":6944152,"optIndex":"D","optDesc":"have"}]}],"analyze":null},{"quesId":"2ac8b149911b4e5fa62724e6e859da8e","subjectId":19,"quesTypeId":0,"diffVal":3,"quesScore":1.0,"quesCount":1,"mate":[],"quesVersion":"v1","year":"2018","grade":null,"section":{"sectId":65,"sectName":"单选题"},"squestion":[{"squesId":"9c53edc4fa9d4fa19e373889cfefb4c5","squesScore":1.0,"squesStem":"&lt;span class=\"wjdu-NO-znyin\"&gt;&lt;/span&gt;Rainforests are the lung of the earth. If we ________ all the rainforests, all the living things will die out. &lt;br /&gt; &lt;p&gt;&lt;/p&gt;&lt;div style=\"overflow:auto;width:auto;\"&gt;&lt;table class=\"tablestyle\"&gt;&lt;tr&gt;&lt;td abbr=\"_option_A\" class=\"td25\"&gt;A.&amp;nbsp;cut down&lt;/td&gt;&lt;td abbr=\"_option_B\" class=\"td25\"&gt;B.&amp;nbsp;put up&lt;/td&gt;&lt;td abbr=\"_option_C\" class=\"tde\"&gt;C.&amp;nbsp;cut up &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;","squesSerno":"1","squesStemStr":null,"option":[{"squesId":0,"optId":6998222,"optIndex":"A","optDesc":"cut down"},{"squesId":0,"optId":6998223,"optIndex":"B","optDesc":"put up"},{"squesId":0,"optId":6998224,"optIndex":"C","optDesc":"cut up"}]}],"analyze":null},{"quesId":"fa99a13e13ad431ba46cfdebf1a2d9b3","subjectId":19,"quesTypeId":0,"diffVal":3,"quesScore":1.0,"quesCount":1,"mate":[],"quesVersion":"v1","year":"2016","grade":null,"section":{"sectId":64,"sectName":"单词拼写/单词释义"},"squestion":[{"squesId":"81f55db8efe34545a7797a9fa5ad0ced","squesScore":1.0,"squesStem":"&lt;span class=\"wjdu-NO-znyin\"&gt;&lt;/span&gt;事故______","squesSerno":"1","squesStemStr":null,"option":null}],"analyze":null},{"quesId":"a32ccd8ff4d447acb17c5cc502a6a917","subjectId":19,"quesTypeId":0,"diffVal":4,"quesScore":1.0,"quesCount":1,"mate":[],"quesVersion":"v1","year":"1","grade":null,"section":{"sectId":65,"sectName":"单选题"},"squestion":[{"squesId":"25fc804d1dde43cea868679509b4b9fe","squesScore":1.0,"squesStem":"&lt;span class=\"wjdu-NO-znyin\"&gt;&lt;/span&gt;Could you please ______ the window？It's very cold outside.&lt;div style=\"overflow:auto;width:auto;\"&gt;&lt;table class=\"tablestyle\"&gt;&lt;tr&gt;&lt;td abbr=\"_option_A\" class=\"td25\"&gt;A.&amp;nbsp;not open&lt;/td&gt;&lt;td abbr=\"_option_B\" class=\"td25\"&gt;B.&amp;nbsp;not to open&lt;/td&gt;&lt;td abbr=\"_option_C\" class=\"td25\"&gt;C.&amp;nbsp;don't open&lt;/td&gt;&lt;td abbr=\"_option_D\" class=\"tde\"&gt;D.&amp;nbsp;to not open&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;","squesSerno":"1","squesStemStr":null,"option":[{"squesId":0,"optId":6948983,"optIndex":"A","optDesc":"not open"},{"squesId":0,"optId":6948984,"optIndex":"B","optDesc":"not to open"},{"squesId":0,"optId":6948985,"optIndex":"C","optDesc":"don't open"},{"squesId":0,"optId":6948986,"optIndex":"D","optDesc":"to not open"}]}],"analyze":null}]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_08</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.8')" >
+        pass</a>
+    <div id='div_pt5.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.8: {"code":200,"msg":"","data":[{"bookNodeId":13411,"bookNodeName":"Unit 1 My name's Gina.","level":0,"childrens":[]},{"bookNodeId":13412,"bookNodeName":"Unit 2 This is my sister.","level":0,"childrens":[]},{"bookNodeId":13413,"bookNodeName":"Unit 3 Is this your pencil?","level":0,"childrens":[]},{"bookNodeId":13414,"bookNodeName":"Unit 4 Where's my schoolbag?","level":0,"childrens":[]},{"bookNodeId":13415,"bookNodeName":"Unit 5 Do you have a soccer ball?","level":0,"childrens":[]},{"bookNodeId":13416,"bookNodeName":"Unit 6 Do you like bananas?","level":0,"childrens":[]},{"bookNodeId":13417,"bookNodeName":"Unit 7 How much are these socks?","level":0,"childrens":[]},{"bookNodeId":13418,"bookNodeName":"Unit 8 When is your birthday?","level":0,"childrens":[]},{"bookNodeId":13419,"bookNodeName":"Unit 9 My favorite subject is science.","level":0,"childrens":[]}],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_09</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.9')" >
+        pass</a>
+    <div id='div_pt5.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.9: �PNG
+
+   IHDR   _   T   ��6    IDATx��W�vU������A�
+RDPT@,5"�D��ݨ\oI0�+H��cC��("E�#MT,(*V� X������Y�ǜ�rg2Yk�2�3�1�s��~�i��͛W�)
+[=(Z��t��b &lt; ����?W��T�������;�_e5s�����K����X��@2�7m�V���_���l��2a[&gt;���,�.���h۟����l_��w��z�C��j��V�6m�,����N�����U����[���A�6U1V��*������=l����~d�kΒxc��f���:#F[x�L�vE�F,��e�~��~���y�n����i{�#12�G���Kn��{��YY���G��%�"������ t��{�gHD���yI�d��Ї&gt;t  	w�u���kݢ���|�d1��^?�����Nf�\=�o� @v������_V�m���l�	����9�t�˸]w�u� ��I�`��]UD)p*����A��&amp;J�K���ShP�]+����4ǳ��d�I����ǳb�Zi�~΢����Om~z]�6�����O�y�cޟ������V1kE�F��#��6�`}�]d{V3 �|��A���9�&lt;@U��3���{�ǳ��=+���^i�g��d��������zD���mk�� �±F1�L ���Z�ӗ��3�3��|�#ge*�j��cH�&gt;U��,�����Q�A�yt(=�W\�s5Ni�����93x���'����tk��Ԋ�l���\�8Z�2@��-�&gt;�K�� Q�Y�0���gpD6����Lw��ܥ��!W%.��3���zԣ&amp;H8�3�";l�����W쒰���3}��|�k\}���K6��5 4��TiYH�$��	�#:P�/ۚ���;�á/���s�4�5g�S?L��n�8������0���O{�=g7̭V�a�������ʚ��F�� ���o?��s�vJ�"��L���a�&gt;DĠ��+��
+9�Mv�	}�mn����vd��vc�C��M_dz�������&lt;���6F8a�v�=�n2�wO�v���&gt;6Ə{���+���C��6�E�&gt;�,$Q������Q�eLѨ�r����&lt;��=c 3FI�62`�����SX�#3�s4�piצ���g�&lt;�����զp�6:s�q�:)"���N;�X����G?z�=��O���ZYK)��2�p$ �p��X�O �5^�j�O�ڳ6u�oY��D y
+9p�Y�ы���O�9�8�&lt;��rr�J9^�&amp;:�'�|�g�����`&lt;�\���X�5?���Y����k��7ʑO  �,�b�2-��D��A�B�v�2=�Q
+X}�"���d��@&gt;ǵpr�q�h{�&lt;
+�U!9;��D�g��Q�O;����J�Fv��l.9��@'&lt;�S�Q������o&lt;7�p���/~�i(�E�����H�W�[�g�Vr�̯c&lt;���L�ڗ�O�q��ԧ&lt;�)u��`��%��7���0�'7�泗���|a��Y?����&gt;������������O:x��׿����x��󚉌�i10��E��U�i�(� �n�j,�ep�d5�1s���&lt;m���C�Z�o���YOzғf��C�9�^2������YO�D_X�����qa����;��o����B�����W������Y�o9�
+�B���1��D�q�T��"�&lt;%gD��ڐ�ԕ�V�.��z�Ӟ�r�f�UD��~��խ��:+ ��9�wQ&amp; ���/A"�l�����sT�l0������Y��o�q��~*�J����J@&lt;�q�[���sOGer&gt;�Ӂ�6��&lt;�p���,ꑈl��VF����/"sôGnr~�����&gt;cExJ����1�#�x������?d���
+90r$y�1Oi�q��/~�������z��
+���sϹr���ę���|u��׮&gt;��Ϯ^��̘� �!H
+��ˋ �ۮ�2G������b,c��0�3G�H�g�R�;�#��_��ꨣ����:At���;V;������K�t�g����c"����d��'?Y���?�Օ]l����W�����}�ܓa��p�l)�&gt;�∃�5���@i�	�F�g}�%C�G�v$+��Lc�#˘�M�v����[�d}�{�[�G&gt;�QHF"&lt;V�T� Kd�j!��uL�K�j�tIe��կ&amp;�%��t"����K)H��׿���׾���[�W���b9�
+�x}k���%Q�UD2ε�-�߽Ui��&amp;J�!�q�6��-��Ö=�zs�����w��֦f��(��xd�9�D��)���w���^~��I���M�
+V��t'*�.�m�t;M}�K_��!)e�t���~��;l��G*Z���/��5�E_�ʐec.c��iS��"b��� ��xz�ni��O��[�����K/#�X���|��#�h�00�R��d���p������U�MQ��fd�Nγ2l��]w��|N��*����W|���`�HU&lt;�!W#0�HC#"Z{�h�~�j7�9"E�~JݷR�P.ԟ��f�mT���'W�{��&amp;�,_�+RE����p�O?��;���G@D�p��d �����tg�p��&gt;++BJ���d��#�pi�L��"&amp;�zvEe�A��v�D�~�J$F�gQ�Y1'rOg��so��^N���0//x��8^�����{����Y��͵�&gt;�9�Y��ϝVC�q�ni���l��w)������T�w)	٥&amp;�V��C�p�T�Q�#���$5�]��FL���	�Ꙍ�=�_��L�{$N�g�0IE����|�+�Ή�_��흣�&lt;��!PtJM�u�&amp;����D��x�j�9Iڒ8 �%��D2[�����E�Bl�����Xs�;��q�N}��iG$��U�hGj��[	���w%��
+�5N�O�@��n׊vQ�H���;	C�����s�pdD0�U,wiQH���q��0����}l�ذaV���R��Sڒ�J=�d�=��YE8���	�t���*k�+�S�i&lt;鑡O�P�PºGl�	���\��y�'��6�^d �d2��P��袋V�z��qH����e0��"�pl�`@�3�#�\,���c^��W�^��LZ��jr�G�{��Y1l�IA�S��!�E���T�:��|�0�&lt;��d�iC$���BW�湚�K0 @DY�"x΀G�qَ�2�X�H{�_8�E"�&gt;��s*q�)���n��$W�.'�.'*N��aNK6�#�8br����p���ppA��t �&gt;�����K���u(�*YV���fEU}��.:&lt;Sb|��@�%��9�F3���jK�F':}`�c�T�zM�J�9�s�{dè C���i��#�\���/]��ɨ8�_v�e���9��U����g:8=�#��G:��I{0;�"]���� ��fW$l���Q���q���O@����,a	ʽN�@�E��W_=//���mDZ��\��$D�AN�*��
+gҟ��H�J����F���&amp;���g&gt;3�J_u�i��F�'1׈�D�N����g�&gt;e�g�(�C�5��,	7�@W���A�*� ��.����)"C�K"
+h�o�W^y��6�jA�3����~��3�|`�XmR�vd��UjC��6�wiFՑ�j;蠃&amp;`g�L�W\1g~2�KKdYYҡ+.�`�9��^pQ�M��:Z� *�"�A�!��&lt;
+�xJs�P�&lt;K�o��ʙ���'��'�4��^j8H���9�+̩�k��&amp;[�#�
+��6����9G%�6l:9���;nNX_R�c�I'�4v!ܹ�|��dl�,d����P�ULV	#@�О��'C�6ΐ�-���!]p�&gt;s�D|�ߘ&gt;��vG&gt;��"��D&lt;�}���\�M��f}�.�9V��W��*�`�0�a �1�|T��Z�ش��E��J q���y��.���͈
+Ж��"W^�U�"Z� ��ё�@W�*B� ��EX��D fn)�	D�s&lt;�%m��W�"�\z�J�w�#{B�"�F�(���S�g�M�t�V��V�/�t�O'K��,��\�k���|6���M6g*�.���͖E�T��aj�)��	1��apr��\$���m`����HB�7OK���x�t(���h�t��d��^��3N �G!K4�@U��+8�x�F�6�
+��g�Tz��n\+	�C9d��{�x�h���gD��!��2����"�3�/BE�"�r��矿��G&gt;2�)�D�\0�0^z��E�H\�	d�T}0� �6-UH1��[Ud�W�T��1��j�Q?=�� �3�~�={��o�X�:�ր�L\�@�1T;P #�x@=#��^n�&gt;�wg�q�D�hz�[�: �e :�+ ��F��Ɗ.�A� Y
+m�`]��G��cے|}ٺ�!0���G�y�Ҭ ـ�e��	�πP�h:��Hq����/�&lt;��"[�9��c'��[&amp;�ɑ�oEO��4F���U ��k:�XdK]
+3�J����9_�/��/�E(����|��5_��]�\�zֳ�%MJ�eQ��ouXe�D&gt;�U��^f���D�1���`����$J�� �����A�}�k�X��%��t�1�/I�&lt;���\��)��������r�'����j� ��G��9�C��'�͵��Ӧ��^�$#�"��'o�|�lF�=���pm
+!����#
+�LC0�f+�~�S�����_��i.�#�x@���A�0N�S{�qaD��4G��Ғm�U����C��p�6�n&lt;�Yu��o�@`���!��`��7�c�9fR�&amp;�$�@�S垂�  P ��T��r�/M"�1	���~���|�8��D/�"�|:U�Y�Яҭ�@�#�#ldd�K�D7yk�&gt;�8�������3\�j�g�Ti���m���g��p���_��׭�t��-��k�*F ��R�0�U�|����yW�����	��������|�V`�3�A���F�wO/���3�s9�X����ɁY16�d�����G\4�+L;Y��l^i+{&lt;+�(k�%��:�'�����4R 8!��
+a��r�)A�m����{��aB��
+nw�wO�r�)��8��%Y�p:�� ieK�0����C~�jG���\΄��d �^��1�\&lt;HqU��W8�����lvOW���DI&amp;�*�o��&gt;�A� � ��=n��P�y���;bR��݇?��ɉ�~���Óy�B"b�$@�y�`�T��0���l`R��ʀ��6���T��l��}��s�3���V�s�yNL�s:iC��,����ƙ��^�B�gz\�N��2@oB�NHdT;a-g�g���}�P���
+1��x�|'�	��8�s4y�Ia`y�C�5O�|+ Qd£���HGi��^ռSЩN���hA%e����d�E��`)��ǩ��_�M��"�W"}���Lp2@UL���(�Xy�W=Q ���]�'�H$ë6�����HN�	�G�1�Z%d�+(��\�i��g�Ŏy0XȠ�JN��8��A��q2!G��n2�Nʰ*`�1���|樞]́_��W��op��D�3�!���D����s��G�/z�&amp;"�(����0d"J�kC�t�=i�*t��co⨮��V���l@4��W�`�;�i�"�ai}KR`X����?�!G��{Ym!�Y5�Jϕ��o *p�+�H �1�UD��ݖ�69R"�� ��j�q
+���k��f �Ȇ����c�M����s6�-y��&gt;�aF4��ym��h�������Nm�O)C���f�9���_����&lt;ܵ����~�Z�Vs�I���`�P��!7_�Z�MI;���S,��+ ���_�`H/Y�q�\nc�F?��g|�:+J�9���8�X��s81��"1�r�y�(�#�L���������=Kڢ�ݜ@��6���?�sA����u�L9�)!̦���HI��B��+�k?`�|l�����*�fh�FC�!O���������(�ߚ|����C��1����+p�3�s�1�N�룗]��N}&gt;!6N0.���,��v�2 m*�E����������,�O&lt;q���bNC"Y"�\��PA4��3JZ�"�U��&lt;sɠ�7#)�������o&lt;�XEϙ�DC�~i�����B..��$"�#��c��6ϳMN�s�l󱍳��AM���RB c�n(m��ej��L��VN#�x���b��g(`@ n�� ��Oz|��&lt;$2��R'K#��K.�d���}n�'&lt;�\�E������r��g#��m|�V��ҏ&lt;rܻ������ �,�@�Bw)s��� �u�S�G�4�a@���%��%R����ƴq�/�x�� �G:2�x:U2�Xƪ���Cճ���!H��038��ˉE��j��޷(�i�9��Q�z8pD� �^W�dq�B���
+s����O(��UW��+��2r-5�+*�W�R�l��.�Ey�2�!r���	�֌�x�`9F�p�U�x�JPd�gr����ȳj���V���ޠ_1.6��Y����j\�&lt;sv�[Y��)�i"�ܫ^VxX?�@"�I�_�Rb2���Y�0R����T�����0:D&gt;�d,�2�nGT+��C���n ���&gt;�d�������V�B�U��c��A?&gt;�6s����ʐoR �)3ٲ# �HB�h7�\�$��� �EC�!�|1�rD=V�~s�t�^_9��
+"r��V����*�6b�� �g�G�U�|c��r���c;'[Q�} �sJv�eY�'��3y�����������U��_��l^'[�k��H��U�wzEO��7,�&lt;'+$��g�6c�FNX�*�Ȑ���"�9�U6(��V��J��g&lt;������%7��$�$F!�G=�S������~���q�ݑP��*K-�p���E��C��&lt;�*U�/0�\;J"@a4�M�1��`qo�y��թ�Co��Ɖ�6x�"�,V=�I�{6#�J�_���*k�/#A!��r���S����P�L��h2]E��8�1���Hv�ꪫf�"�8�Zē���I�r0��q� ŉ6��H���@&amp;�!���p2ͣ�*�+��tr�U��§g��.X9�\6��b�F�UD�.y�mY$*�`��@���U�4H�  y��7 +����PA�0$�����Ϝ�h����3nՑ����ς����o�tr��'�&lt;�T/U��hW8L$/�X�t���c����L��a�(�/��o�i��%�&lt;�$��H��	&lt;�1��F�dgq�6 �Q����Lz�$�~�E���F�O9�����X����+�� �}���4#r�B�6�6�.h�'O�FW���8
+���
+�����n��N�{e�|�TJ�&lt;W�G5�% xo��J�6�Z�0#�W\�$��a�4�l0G!������'��,V��3_�q���xs�"f��)�Z���݈5�&amp;�H��_P��&gt;8��a0s������&gt;v�����������L��`o��5i�&amp;�p���]�E�y=S�CE�v�u��󩧞:�qr�gv�Z�B��0O�=��8Dp�'�1�r
+g��"�~��l�(0��O�Bg�9�ns�Ǚq���ؼUN�����!��W�P햎+��vbC�65��q���De.c��(d *z 7�S4��'+�0��0�'Oәm�r�6�[�V#L�9)[�3v�C�X�#_`�l�a�v�n��H����1l���� �S���2�O9�J�s`*�X��mL�$� 2y�&gt;�u`��d �)���^;�'o�m=]�l�Y�Y��j�6�7���
+����3�&gt;�(�o,Ҍ�&amp;�\�����N��!�=�8���!EJ�I�i�ra ��|�&amp;�x�@"y�����E�@��)��b�U@E��&amp;��A�&gt;O��"���h9lA&gt;���W`�3�^y��}��8Ͻ�}"\4�M�Nv��Ǉ+�p!�s�����E��x�����~䛨&amp;!sE 1B�R�%��D^�W�r����G=F��dD!� r0��:�fH,��  �IDATm�/��-R�2��ͳ����|eu�q�x#�8+�3��E��a,��R9Vp�:q����Ww��C��S�U����Z��xc�6:���V�#1�AYXJ�U�R8ó�	�l��;���}h���hD$���3O�RJBT����6�H46��\�� ��3��R��H�,m1�&lt;r��HG��3�&gt;�S��!�I���R�$��+�����R"���/MY~&amp;1!JDi��
+CE�}K������Hʀ"���J9ڗD���A_�3�.��*)�d,�d�d%�-����C������U�F��(�t���"�r� {i��d)�q��O|b�ꖍ�W���	P��h��`KN4�4p�g�|^8��Vg�}�x�?�g𖷼e}��@������s��Ya�o&lt;��
+W�8D;���B��cE��;9H$��LA�_цd��gx"\?\��*��bL΀���?U#���1��w�׿������� B=��@ϝ*�d�Q��1��X`TȡCu��e�y�p�9A.�
+r��O� !�qN,�%���=V��~s�p�����J��,#�U��}Ɠc�l�.e�����}�K^2�*�f�I����(umE�R��6[���7��M3���}�D����"�9 � �Lđ�4�
+#�q��&gt;�'1B�y�G��V{[�s��C2g#���#=�vji��E5�tѳtĀ����N0��+��}�ߤ9�1s�A��ψ�P�x�	Q��_��xKV�Q(�&lt;�t|�d&lt; V���$"oF6��r/�"�=�^d"K����f��P��fu9I8q��x�L_�0��&lt;�-�٨6�
+Y
+�qP jǏ��g��ǿR���U9��:�l�S�-'�` z)1�g��(@�/J�D�\r�駟&gt;��S�'O�&lt;�s&amp;��ÿD��Ѿ�?@Wr�3������E��މ�F�8m��W��d"�����b%���T��[]��&gt;���ё�~�xr� X&gt;���&lt;����w�+���'���8�=�D,9�Xt Њ�Xt;�{��]�g[;=o�~?-�*d0@
+��A�(ю`�� ���~�I6��rIQ�'��D�q��#��K:�v�y��g��LAT${�Bs�6�t���V:;������\�R�r?i�'���T&amp;�"�@�ݽ1�}wG�Wk� EE&amp;��:�y����G��hA�L�֮r�9�*���(F"�&gt;�Ɗz���D����	삪���BF���QX�l8��	�ox����?�([�x��� J���7�=@��+�^�$�����X��B���?W���8P����*��a1�F��$�m�tq,^���.�Ad ��"� �G�y
+ݪ"�f{�����Ut�	'����7�����1��0�#:���r�Lȳ9����h�z��E��/��.喵oA��OF�{-`���-��}ƻ�3�|D �#�&lt;ؑ/���j��q���h( ��^A���Vcz8���~"�F��&gt;���T_6���Y�pT6�p��C��T�aҊtF�t�{f�!����~0�#�18�Ćd������(����ЋD�yD�7S�t�S$J1�U��i���&gt;��Vܭ6i���A��䧁�q��2⡠��R����� ) "�r���~���&amp;&lt;�6����d/�ؐ��lc���V�W9��#�/ǚc�F�qRs����J�����/��X��O��آ\�"�nvZa˲���(��9�|�o�0�9@6g)��2mY�"A1�a���)t��P#��_v��or�?P1�c����+�c3�r��tlt�D&gt; �%�&amp;m��e "�&lt;��"�h06gl�O����i	�~W����K���~W�q�ݜ%)3gIR��gS��жt�aW��1NO�2��lx0�3I��ıt�v�"J�d�r������ ���^�    IEND�B`�
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_10</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.10')" >
+        pass</a>
+    <div id='div_pt5.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.10: {"code":200,"msg":"","data":[{"schoolId":40,"classId":543,"className":"3班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":10,"gradeName":"高一年级","stageId":3,"stageName":"高中","courseId":8,"courseName":"化学"}],"studentCount":3,"list":[]},{"schoolId":40,"classId":837,"className":"15班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":839,"className":"17班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":835,"className":"13班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":833,"className":"11班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":831,"className":"9班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":829,"className":"7班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":827,"className":"5班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":825,"className":"3班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":824,"className":"2班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":823,"className":"1班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":849,"className":"27班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":850,"className":"28班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":845,"className":"23班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":832,"className":"10班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":828,"className":"6班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":841,"className":"19班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":838,"className":"16班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":840,"className":"18班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":836,"className":"14班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":834,"className":"12班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":846,"className":"24班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":848,"className":"26班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":842,"className":"20班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":844,"className":"22班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":852,"className":"30班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":851,"className":"29班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":847,"className":"25班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":830,"className":"8班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":826,"className":"4班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":843,"className":"21班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":6,"gradeName":"六年级","stageId":1,"stageName":"小学","courseId":10,"courseName":"体育"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":548,"className":"2班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":1,"gradeName":"一年级","stageId":1,"stageName":"小学","courseId":23,"courseName":"计算机应用"}],"studentCount":6,"list":[]},{"schoolId":40,"classId":480,"className":"1班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":1,"gradeName":"一年级","stageId":1,"stageName":"小学","courseId":23,"courseName":"计算机应用"}],"studentCount":189,"list":[]},{"schoolId":40,"classId":628,"className":"7班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":1,"gradeName":"一年级","stageId":1,"stageName":"小学","courseId":23,"courseName":"计算机应用"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":610,"className":"6班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":1,"gradeName":"一年级","stageId":1,"stageName":"小学","courseId":23,"courseName":"计算机应用"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":609,"className":"3班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":1,"gradeName":"一年级","stageId":1,"stageName":"小学","courseId":23,"courseName":"计算机应用"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":799,"className":"4班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":1,"gradeName":"一年级","stageId":1,"stageName":"小学","courseId":23,"courseName":"计算机应用"}],"studentCount":0,"list":[]},{"schoolId":40,"classId":691,"className":"99班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":7,"gradeName":"七年级","stageId":2,"stageName":"初中","courseId":23,"courseName":"计算机应用"}],"studentCount":998,"list":[]},{"schoolId":40,"classId":556,"className":"3班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":7,"gradeName":"七年级","stageId":2,"stageName":"初中","courseId":23,"courseName":"计算机应用"},{"roleId":1500,"gradeId":7,"gradeName":"七年级","stageId":2,"stageName":"初中","courseId":3,"courseName":"英语"}],"studentCount":2,"list":[]},{"schoolId":40,"classId":554,"className":"1班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":7,"gradeName":"七年级","stageId":2,"stageName":"初中","courseId":23,"courseName":"计算机应用"}],"studentCount":23,"list":[]},{"schoolId":40,"classId":555,"className":"2班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":7,"gradeName":"七年级","stageId":2,"stageName":"初中","courseId":23,"courseName":"计算机应用"}],"studentCount":3,"list":[]},{"schoolId":40,"classId":564,"className":"1班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":10,"gradeName":"高一年级","stageId":3,"stageName":"高中","courseId":1,"courseName":"语文"}],"studentCount":26,"list":[]},{"schoolId":40,"classId":608,"className":"4班","teacherId":27717,"teacherName":null,"roles":[{"roleId":1500,"gradeId":10,"gradeName":"高一年级","stageId":3,"stageName":"高中","courseId":1,"courseName":"语文"}],"studentCount":6,"list":[]}],"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_11</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.11')" >
+        pass</a>
+    <div id='div_pt5.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.11: {"code":200,"msg":"","data":[],"params":null,"sysSign":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_12</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.12')" >
+        pass</a>
+    <div id='div_pt5.12' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.12: {"code":200,"msg":"","data":{"pageIndex":0,"pageSize":20,"pageCount":0,"count":0,"list":[]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.13' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_13</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.13')" >
+        pass</a>
+    <div id='div_pt5.13' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.13').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.13: {"code":200,"msg":"","data":{"missionCount":1,"list":[{"studentId":27731,"studentName":"111","totalScore":0.0,"repulseCount":0,"shareCount":0,"collectCount":0},{"studentId":27732,"studentName":"222","totalScore":0.0,"repulseCount":0,"shareCount":0,"collectCount":0},{"studentId":27733,"studentName":"333","totalScore":0.0,"repulseCount":0,"shareCount":0,"collectCount":0}]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.14' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_14</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.14')" >
+        pass</a>
+    <div id='div_pt5.14' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.14').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.14: {"code":200,"msg":"","data":{"missionCount":1,"commitRatio":0.0,"punctualCommitRatio":0.0,"delayCommitRatio":0.0,"notCommitRatio":1.0,"list":[{"studentId":27731,"studentName":"111","punctualCommit":0,"delayCommit":0,"notCommit":1},{"studentId":27732,"studentName":"222","punctualCommit":0,"delayCommit":0,"notCommit":1},{"studentId":27733,"studentName":"333","punctualCommit":0,"delayCommit":0,"notCommit":1}]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.15' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_15</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.15')" >
+        pass</a>
+    <div id='div_pt5.15' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.15').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.15: {"code":200,"msg":"","data":{"pageIndex":0,"pageSize":10,"pageCount":0,"count":0,"list":[]},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.16' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_16</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.16')" >
+        pass</a>
+    <div id='div_pt5.16' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.16').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.16: {"code":200,"msg":"","data":{"id":7293,"schoolId":40,"fromType":1,"createId":27717,"courseId":1,"title":"02月25日语文作业","receiver":"3班","createTime":1582610874000,"sendTime":1582610874000,"sendCount":2,"finishCount":0,"unFinishCount":2,"score":6.0,"highestScore":0.0,"lowestScore":0.0,"averageScore":0.0,"difficult":0.0,"materials":[{"type":6,"uuid":"0afb004eb55c4bf2882470851c3f2705","url":"http://file.slothtek.com/0afb004eb55c4bf2882470851c3f2705.jpg","previews":null,"useType":0,"duration":0}],"partMaterials":null,"answer":null},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.17' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_17</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.17')" >
+        pass</a>
+    <div id='div_pt5.17' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.17').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.17: {"code":200,"msg":"","data":[{"id":7293,"schoolId":40,"fromType":1,"createId":27717,"courseId":1,"title":"02月25日语文作业","receiver":"3班","createTime":1582610874000,"sendTime":1582610874000,"sendCount":2,"finishCount":0,"unFinishCount":2,"score":6.0,"highestScore":0.0,"lowestScore":0.0,"averageScore":0.0,"difficult":0.0},{"id":7292,"schoolId":40,"fromType":1,"createId":27717,"courseId":1,"title":"02月25日语文作业","receiver":"3班","createTime":1582610848000,"sendTime":1582610848000,"sendCount":3,"finishCount":0,"unFinishCount":3,"score":6.0,"highestScore":0.0,"lowestScore":0.0,"averageScore":0.0,"difficult":0.0},{"id":7290,"schoolId":40,"fromType":1,"createId":27717,"courseId":1,"title":"02月25日语文作业","receiver":"3班","createTime":1582610638000,"sendTime":1582610735000,"sendCount":2,"finishCount":1,"unFinishCount":1,"score":12.0,"highestScore":12.0,"lowestScore":12.0,"averageScore":12.0,"difficult":0.0},{"id":6498,"schoolId":40,"fromType":8,"createId":27717,"courseId":1,"title":"02月19日听力作业","receiver":"1班","createTime":1582120515000,"sendTime":1582120515000,"sendCount":88,"finishCount":3,"unFinishCount":85,"score":100.0,"highestScore":100.0,"lowestScore":10.0,"averageScore":68.33333333333333,"difficult":0.0},{"id":6497,"schoolId":40,"fromType":1,"createId":27717,"courseId":1,"title":"02月19日语文作业","receiver":"1班","createTime":1582118724000,"sendTime":1582119601000,"sendCount":88,"finishCount":4,"unFinishCount":84,"score":68.0,"highestScore":62.0,"lowestScore":28.0,"averageScore":46.25,"difficult":0.0},{"id":6055,"schoolId":40,"fromType":1,"createId":27717,"courseId":1,"title":"02月19日语文作业","receiver":"1班","createTime":1582110613000,"sendTime":1582110613000,"sendCount":36,"finishCount":35,"unFinishCount":1,"score":2.0,"highestScore":56.0,"lowestScore":0.0,"averageScore":31.542857142857144,"difficult":0.0},{"id":6030,"schoolId":40,"fromType":8,"createId":27717,"courseId":1,"title":"02月19日听力作业","receiver":"1班","createTime":1582107266000,"sendTime":1582107266000,"sendCount":77,"finishCount":63,"unFinishCount":14,"score":2.0,"highestScore":78.0,"lowestScore":0.0,"averageScore":53.714285714285715,"difficult":0.0},{"id":6029,"schoolId":40,"fromType":8,"createId":27717,"courseId":1,"title":"02月19日听力作业","receiver":"1班","createTime":1582107208000,"sendTime":1582107208000,"sendCount":0,"finishCount":0,"unFinishCount":0,"score":6.0,"highestScore":0.0,"lowestScore":0.0,"averageScore":0.0,"difficult":0.0}],"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='pt5.18' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_18</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt5.18')" >
+        pass</a>
+    <div id='div_pt5.18' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt5.18').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt5.18: {"code":200,"msg":"","data":{"cmdServer":"http://106.75.164.15:89","avServer":"http://106.75.164.15:80","videoWidth":1280,"videoBitrate":512000,"videoFps":20,"videoHeight":720},"params":null,"succeed":true}
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+<tr id='total_row'>
+    <td>Total</td>
+    <td>64</td>
+    <td class="text text-success">62</td>
+    <td class="text text-danger">0</td>
+    <td class="text text-warning">2</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+
+    <script type="text/javascript">
+var data = [
+	{   
+	    name: 'error',
+		value: 2,
+		color: "#D35400",
+		label: "Error",
+		labelColor: 'white',
+		labelFontSize: '16'
+	},
+	{
+	    name: 'fail',
+		value : 0,
+		color : "#D4AC0D",
+		label: "Fail",
+		labelColor: 'white',
+		labelFontSize: '16'
+	},
+	{
+	    name : 'pass',
+		value : 62,
+		color : "#28B463",
+		label : "Pass",
+		labelColor: 'white',
+		labelFontSize: '16'
+	}			
+]
+var newopts = {
+     animationSteps: 100,
+ 		animationEasing: 'easeInOutQuart',
+}
+//Get the context of the canvas element we want to select
+var ctx = document.getElementById("myChart").getContext("2d");
+var myNewChart = new Chart(ctx).Pie(data,newopts);
+</script>
+	
+</body>
+</html>

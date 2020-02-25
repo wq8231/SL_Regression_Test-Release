@@ -112,3 +112,44 @@ class BaseTchTest(unittest.TestCase):
         print(result.text)
 
         self.assertEqual(result.json()['code'], 200)
+
+    def test_13(self): #成绩报告
+        url='http://api.slothtek.com/api/v1/mission/class/report/score?classId=543&schoolId=40&startTime=1582010407626&endTime=1582615207626'
+        headers = self.headers
+        result = requests.get(url=url, headers=headers)
+        print(result.text)
+        self.assertEqual(result.json()['code'], 200)
+
+    def test_14(self): #作业提交报告
+        url='http://api.slothtek.com/api/v1/mission/class/report/commit?classId=543&schoolId=40&startTime=1582010407626&endTime=1582615207626'
+        headers = self.headers
+        result = requests.get(url=url, headers=headers)
+        print(result.text)
+        self.assertEqual(result.json()['code'], 200)
+
+    def test_15(self): #班级错题本
+        url='http://yun.slothtek.com/mission/api/v1/mission/class/error/set?teacherId=27717&schoolId=40&classId=-1&startTime=2020-02-18&endTime=2020-02-25&errorRate=-1.0&topicType=-1&pageIndex=0&pageSize=10'
+        headers = self.headers
+        result = requests.get(url=url, headers=headers)
+        print(result.text)
+        self.assertEqual(result.json()['code'], 200)
+
+    def test_16(self):#作业报告列表
+        url='http://api.slothtek.com/api/v1/mission/teacher/report/detail?missionId=7293'
+        headers = self.headers
+        result = requests.get(url=url, headers=headers)
+        print(result.text)
+        self.assertEqual(result.json()['code'], 200)
+
+    def test_17(self):#作业报告详情
+        url='http://api.slothtek.com/api/v1/mission/teacher/query/report?pageIndex=0&createId=27717&schoolId=40&pageSize=8'
+        headers = self.headers
+        result = requests.get(url=url, headers=headers)
+        print(result.text)
+        self.assertEqual(result.json()['code'], 200)
+    def test_18(self):#空中课堂
+        url='http://api.slothtek.com/api/v1/live/push/server?teacherId=27717'
+        headers = self.headers
+        result = requests.get(url=url, headers=headers)
+        print(result.text)
+        self.assertEqual(result.json()['code'], 200)
