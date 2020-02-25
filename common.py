@@ -2,7 +2,7 @@ import requests
 import hashlib
 import re
 
-
+import yagmail
 class CommonClass():
     def getwebtoken(self, name, psw):  # 获取web端token
         url = 'http://yun.slothtek.com/base/api/out/v2/auth/login'
@@ -27,4 +27,12 @@ class CommonClass():
         md5.update(psw.encode('utf-8'))
         md5psw = md5.hexdigest()
         return md5psw
+    def sendemail(self,file):
+
+        sendSmpt = yagmail.SMTP(user="64439772@qq.com",
+                                password="pcsxctftwxkobgcb", host='smtp.qq.com')  # 链接服务器，此处的password为邮箱的授权码，非邮箱登录密码
+        content = [" test email"]
+        sendSmpt.send(to='64439772@qq.com', subject='test-report',
+                 contents=['report', file])
+
 
