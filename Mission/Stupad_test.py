@@ -114,7 +114,6 @@ class MobileStuTest(unittest.TestCase):
         result = requests.get(url=url, headers=headers)
         print(result.text)
         print(url)
-
         self.assertEqual(result.json()['code'],
                          200)
 

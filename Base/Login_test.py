@@ -23,6 +23,7 @@ class LoginTest(unittest.TestCase):
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36'}
         result = requests.get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual('<Response [200]>', str(result))
 
@@ -35,6 +36,7 @@ class LoginTest(unittest.TestCase):
         data = {'name': self.adname, 'password': self.admd5psw, 'platform': 'WEB'}
         result = requests.session().post(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.text,
                          '{"code":200,"msg":"登录成功","data":null,"params":null,"sysSign":null,"succeed":true}')
@@ -47,6 +49,7 @@ class LoginTest(unittest.TestCase):
         data = {'name': self.adname, 'password': self.wpsw, 'platform': 'WEB'}
         result = requests.session().post(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.text,
                          '{"code":500,"msg":"用户名或密码错误","data":null,"params":null,"sysSign":null,"succeed":false}')
@@ -58,6 +61,7 @@ class LoginTest(unittest.TestCase):
         data = {'name': self.tchname, 'password': self.tchmd5psw, 'platform': 'WEB'}
         result = requests.session().post(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
 
         globals()["token"] = re.findall("token=(.*?);", str(result.headers))  # 在返回头里找到token
         self.assertEqual(result.text,
@@ -70,6 +74,7 @@ class LoginTest(unittest.TestCase):
         data = {'name': self.stuname, 'password': self.stumd5psw, 'platform': 'WEB'}
         result = requests.session().post(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.text,
                          '{"code":200,"msg":"登录成功","data":null,"params":null,"sysSign":null,"succeed":true}')
@@ -81,6 +86,7 @@ class LoginTest(unittest.TestCase):
         data = {'name': self.tchname, 'password': self.tchmd5psw}
         result = requests.session().post(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -91,6 +97,7 @@ class LoginTest(unittest.TestCase):
         data = {'name': self.stuname, 'password': self.stumd5psw}
         result = requests.session().post(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -101,6 +108,7 @@ class LoginTest(unittest.TestCase):
         data = {'name': self.stuname, 'password': self.wpsw, 'platform': 'WEB'}
         result = requests.session().post(url=url, headers=headers, data=data)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['msg'],
                          "用户名或密码错误")
@@ -113,6 +121,7 @@ class LoginTest(unittest.TestCase):
 
         result = requests.session().post(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.text,
                          '{"code":200,"msg":null,"data":null,"params":null,"sysSign":null,"succeed":true}')
@@ -123,6 +132,7 @@ class LoginTest(unittest.TestCase):
         headers = {'userid': self.tchname, 'token': token, 'User-Agent': 'okhttp/3.6.0'}
         result = requests.session().get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 
@@ -132,6 +142,7 @@ class LoginTest(unittest.TestCase):
         headers = {'userid': self.stuname, 'token': token, 'User-Agent': 'okhttp/3.6.0'}
         result = requests.session().get(url=url, headers=headers)
         print(result.text)
+        print(url)
 
         self.assertEqual(result.json()['code'], 200)
 

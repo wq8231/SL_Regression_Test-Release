@@ -7,6 +7,7 @@ from common import CommonClass
 
 class BaseStuTest(unittest.TestCase):
     def setUp(self):
+
         self.admd5psw = CommonClass()._md5('slothtekadmin')  # 管理员账号密码
         self.adname = '19221'
         self.token = CommonClass().getwebtoken(self.adname, self.admd5psw)[0]
@@ -17,6 +18,7 @@ class BaseStuTest(unittest.TestCase):
             'Cookie': 'userId=%s;token=%s' % (self.adname, self.token)}
 
     def test_01(self):  # 新增两个学生
+        '''测试测试'''
         url = 'http://yun.slothtek.com/base/api/out/v2/base/stu/addStus'
         headers = self.adheaders
         data = '[{"stuName":"testaddstu","gradeVal":1,"classVal":480},{"stuName":"testaddstu","gradeVal":1,"classVal":480}]'
@@ -44,6 +46,7 @@ class BaseStuTest(unittest.TestCase):
         headers = self.adheaders
         result = requests.delete(url=url, headers=headers)
         print(result.text)
+        print(url)
         self.assertEqual(result.json()['msg'], '删除成功')
 
     def test_04(self):  # 根据账号查询学生
