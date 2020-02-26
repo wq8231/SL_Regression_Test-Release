@@ -32,6 +32,6 @@ class CommonClass():
         sendSmpt = yagmail.SMTP(user="64439772@qq.com",
                                 password="pcsxctftwxkobgcb", host='smtp.qq.com')  # 链接服务器，此处的password为邮箱的授权码，非邮箱登录密码
         content = [" test email"]
-        sendSmpt.send(to='64439772@qq.com', subject='test-report',contents=[fpp.decode(), file])
+        sendSmpt.send(to='64439772@qq.com', subject='test-report',contents=[ file])
 
 
