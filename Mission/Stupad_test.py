@@ -7,7 +7,8 @@ import math
 
 
 class MobileStuTest(unittest.TestCase):
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
         self.stumd5psw = CommonClass()._md5('111111')  # 账号密码
         self.tchname = '27819'
         self.token = CommonClass().getpadtoken(self.tchname, self.stumd5psw)
@@ -17,6 +18,8 @@ class MobileStuTest(unittest.TestCase):
             'userid': self.tchname,
             'Content-Type':'application/json;charset=UTF-8',
             'User-Agent': 'okhttp/3.6.0'}
+
+
 
     def test_01(self):  # 班级资源
         url = 'http://api.slothtek.com/api/v1/resource/class/query?classId=556&subjectId=-1&fileTypes=-1&pageIndex=0&pageSize=12'

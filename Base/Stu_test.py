@@ -1,12 +1,14 @@
 import requests
 import hashlib
 import re
+import os
 import unittest
 from common import CommonClass
 
 
 class BaseStuTest(unittest.TestCase):
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
 
         self.admd5psw = CommonClass()._md5('slothtekadmin')  # 管理员账号密码
         self.adname = '19221'
@@ -91,8 +93,8 @@ class BaseStuTest(unittest.TestCase):
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36',
             'Cookie': 'userId=%s;token=%s' % (self.adname, self.token)}
-
-        files = {'file': ('addstu.xlsx', open('/var/lib/jenkins/workspace/SL_Regression_Test(Release)/addstu.xlsx', 'rb'))}  #main文件的当前目录，所以只有一个点
+        path = os.path.join(os.getcwd(), r"addstu.xlsx")
+        files = {'file': ('addstu.xlsx', open(path, 'rb'))}  #main文件的当前目录，所以只有一个点
         data = {'Content-Disposition': 'form-data; name="file"; filename*=utf-8''addstu.xlsx',
                 'Content-Type': 'application/msword',
                 }

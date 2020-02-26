@@ -7,7 +7,8 @@ import math
 
 
 class MobileTchTest(unittest.TestCase):
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
         self.tchmd5psw = CommonClass()._md5('123456')  # 管理员账号密码
         self.tchname = '27717'
         self.token = CommonClass().getpadtoken(self.tchname, self.tchmd5psw)

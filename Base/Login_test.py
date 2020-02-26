@@ -8,7 +8,8 @@ import HTMLTestRunner
 
 class LoginTest(unittest.TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
         self.admd5psw = LoginTest()._md5('slothtekadmin')  # 管理员账号密码
         self.adname = '19221'
         self.tchname = '19328'

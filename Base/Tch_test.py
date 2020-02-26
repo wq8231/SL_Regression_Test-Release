@@ -4,10 +4,11 @@ import re
 import unittest
 from common import CommonClass
 import math
-
+import os
 
 class BaseTchTest(unittest.TestCase):
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
         self.admd5psw = CommonClass()._md5('slothtekadmin')  # 管理员账号密码
         self.adname = '19221'
         self.token = CommonClass().getwebtoken(self.adname, self.admd5psw)[0]
@@ -118,8 +119,9 @@ class BaseTchTest(unittest.TestCase):
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36',
             'Cookie': 'userId=%s;token=%s' % (self.adname, self.token)}
+        path = os.path.join(os.getcwd(), r"addtch.xlsx")
 
-        files = {'file': ('addtch.xlsx', open('/var/lib/jenkins/workspace/SL_Regression_Test(Release)/addtch.xlsx', 'rb'))}     #main文件的当前目录，所以只有一个点
+        files = {'file': ('addtch.xlsx', open(path, 'rb'))}     #main文件的当前目录，所以只有一个点
         data = {'Content-Disposition': 'form-data; name="file"; filename*=utf-8''addtch.xlsx',
                 'Content-Type': 'application/msword',
                 }
