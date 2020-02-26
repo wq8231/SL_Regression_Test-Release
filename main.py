@@ -20,6 +20,8 @@ if __name__ == '__main__':
     reportpath=os.path.join(os.getcwd(),r"report")
     reportname = os.path.join(reportpath, now + "Regression-test-report.html")
     fp = open(reportname, 'wb')
+    fpp = open(reportname, 'rb').read()
+
     runner = HTMLTestRunnerCN.HTMLTestReportCN(
         stream=fp,
         title='{ SL_Test_Report }',
