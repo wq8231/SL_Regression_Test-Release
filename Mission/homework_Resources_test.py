@@ -252,3 +252,13 @@ class HomeworkResources(unittest.TestCase):
         print(result.text)
         print(url)
         self.assertEqual(result.json()['code'], 200)
+
+    def test_23(self):
+        '''分享图片到班和校本'''
+        url='http://api.slothtek.com/api/v1/resource/upload'
+        headers = self.tchheaders
+        data='{"acceptor":[{"acceptId":40,"acceptType":8}],"bookId":-1,"fileUUID":"c_7d7d714a6b714319823c5d1dd9d877d1","kpis":[],"name":"mmexport1582765880070","nodes":[],"relevant":[],"schoolId":40,"stageId":1,"subjectId":18,"type":11,"versionId":484}'
+        result = requests.post(url=url, data=data, headers=headers)
+        print(result.text)
+        print(url)
+        self.assertEqual(result.json()['succeed'], 'true')
