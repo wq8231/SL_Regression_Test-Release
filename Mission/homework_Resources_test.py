@@ -276,7 +276,7 @@ class HomeworkResources(unittest.TestCase):
         '''上传资源到我的资源'''
         url='http://api.slothtek.com/api/v1/resource/upload'
         headers=self.tchheaders
-        data='{"acceptor":[{"acceptId":556,"acceptName":"3班","acceptType":1}],"resFrom":-1,"resId":"49261","resType":5,"schoolId":40,"stageId":-1,"subjectId":-1}'
+        data='{"acceptor":[{"acceptId":40,"acceptType":8}],"bookId":-1,"fileUUID":"c_5e4d08cdc545445fa49bdee1f8847112","kpis":[],"name":"微课_2020-02-21_21-06-32","nodes":[],"relevant":[],"schoolId":40,"stageId":3,"subjectId":70,"type":11,"versionId":457}'
         result = requests.post(url=url, data=data.encode(), headers=headers)
         print(result.text)
         print(url)
