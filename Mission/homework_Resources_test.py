@@ -261,7 +261,7 @@ class HomeworkResources(unittest.TestCase):
         result = requests.post(url=url, data=data, headers=headers)
         print(result.text)
         print(url)
-        self.assertEqual(result.json()['succeed'], 'true')
+        self.assertEqual(result.json()['code'], 200)
 
     def test_24(self):
         '''查看原题'''
@@ -277,7 +277,7 @@ class HomeworkResources(unittest.TestCase):
         url='http://api.slothtek.com/api/v1/resource/upload'
         headers=self.tchheaders
         data='{"acceptor":[{"acceptId":556,"acceptName":"3班","acceptType":1}],"resFrom":-1,"resId":"49261","resType":5,"schoolId":40,"stageId":-1,"subjectId":-1}'
-        result = requests.post(url=url, data=data, headers=headers)
+        result = requests.post(url=url, data=data.encode(), headers=headers)
         print(result.text)
         print(url)
-        self.assertEqual(result.json()['succeed'], 'true')
+        self.assertEqual(result.json()['code'], 200)
