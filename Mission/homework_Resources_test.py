@@ -254,10 +254,29 @@ class HomeworkResources(unittest.TestCase):
         self.assertEqual(result.json()['code'], 200)
 
     def test_23(self):
-        '''分享图片到班和校本'''
-        url='http://api.slothtek.com/api/v1/resource/upload'
+        '''网盘资源分享图片到班和校本'''
+        url='http://api.slothtek.com/api/v1/resource/share'
         headers = self.tchheaders
-        data='{"acceptor":[{"acceptId":40,"acceptType":8}],"bookId":-1,"fileUUID":"c_7d7d714a6b714319823c5d1dd9d877d1","kpis":[],"name":"mmexport1582765880070","nodes":[],"relevant":[],"schoolId":40,"stageId":1,"subjectId":18,"type":11,"versionId":484}'
+        data='{"acceptor":[{"acceptId":27819,"acceptName":"sssssx","acceptType":4},{"acceptId":27923,"acceptName":"wqqqa","acceptType":4},{"acceptId":40,"acceptType":8}],"resId":"49130"}'
+        result = requests.post(url=url, data=data, headers=headers)
+        print(result.text)
+        print(url)
+        self.assertEqual(result.json()['succeed'], 'true')
+
+    def test_24(self):
+        '''查看原题'''
+        url='http://api.slothtek.com/api/v1/mission/common/detail?missionId=%s'%globals()['missionid']
+        headers = self.tchheaders
+        result = requests.get(url=url,headers=headers)
+        print(result.text)
+        print(url)
+        self.assertEqual(result.json()['code'], 200)
+
+    def test_25(self):
+        '''上传资源到我的资源'''
+        url='http://api.slothtek.com/api/v1/resource/upload'
+        headers=self.tchheaders
+        data='{"acceptor":[{"acceptId":556,"acceptName":"3班","acceptType":1}],"resFrom":-1,"resId":"49261","resType":5,"schoolId":40,"stageId":-1,"subjectId":-1}'
         result = requests.post(url=url, data=data, headers=headers)
         print(result.text)
         print(url)
