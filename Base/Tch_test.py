@@ -13,7 +13,6 @@ class BaseTchTest(unittest.TestCase):
         self.admd5psw = CommonClass()._md5('slothtekadmin')  # 管理员账号密码
         self.adname = '19221'
         self.token = CommonClass().getwebtoken(self.adname, self.admd5psw)[0]
-        # self.token = '6cb42a26500049bc98d28689d5fc0137'
         self.adheaders = {
             'Content-Type': 'application/json;charset=UTF-8',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36',
@@ -40,7 +39,7 @@ class BaseTchTest(unittest.TestCase):
 
         self.assertEqual(result.json()['code'], 200)
 
-    def test_03(self):  # 查询整个学校老师，顺便判断刚刚添加上没有
+    def test_03(self):  # 查询整个学校老师，判断刚刚添加上没有
         '''查询整个学校老师，顺便判断刚刚添加上没有'''
         url = 'http://yun.slothtek.com/base/api/out/v2/base/teacher/getTeachers?keyword=&page=%s&pageSize=10' % \
               globals()["page"]

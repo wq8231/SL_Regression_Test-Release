@@ -193,60 +193,63 @@ class HomeworkResources(unittest.TestCase):
         url = 'http://api.slothtek.com/api/v1/mission/teacher/correct'
         headers = self.tchheaders
         data = '{"answerId":%s,"missionId":%s,"parts":[{"correctImgs":[],"correctScore":10.0,"correctType":1,"id":%s,"items":[{"correctImgs":["http://file.slothtek.com/3027eb9af4234d4990d260d9bf965051.jpg"],"correctScore":10.0,"correctStatus":0,"itemId":%s,"score":10.0}],"takeImgType":1,"topicType":5}],"reviewIds":[]}' % (
-        self.stuname, globals()['missionid'], globals()['partsid2'],globals()['itemid2'])
+            self.stuname, globals()['missionid'], globals()['partsid2'], globals()['itemid2'])
         result = requests.post(url=url, data=data, headers=headers)
         print(result.text)
         print(url)
         self.assertEqual(result.json()['data'], '作业批改成功')
 
-    def test_17(self):  #老师查看刚刚批改的情况，并验证总分
+    def test_17(self):  # 老师查看刚刚批改的情况，并验证总分
         '''老师查看刚刚批改的情况，并验证总分'''
-        url='http://api.slothtek.com/api/v1/mission/teacher/correct/detail?missionId=%s&commitId=%s'%(globals()['missionid'],self.stuname)
-        headers=self.tchheaders
-        result=requests.get(url=url,headers=headers)
+        url = 'http://api.slothtek.com/api/v1/mission/teacher/correct/detail?missionId=%s&commitId=%s' % (
+        globals()['missionid'], self.stuname)
+        headers = self.tchheaders
+        result = requests.get(url=url, headers=headers)
         print(result.text)
         print(url)
         self.assertEqual(result.json()['data']['correctScore'], 12)
 
-    def test_18(self):  #学生查看批改情况
+    def test_18(self):  # 学生查看批改情况
         '''学生查看上调用例的批改情况'''
-        url='http://api.slothtek.com/api/v1/mission/student/answer/detail2?commitId=%s&missionId=%s'%(self.stuname,globals()['missionid'])
-        headers=self.stuheaders
-        result=requests.get(url=url,headers=headers)
+        url = 'http://api.slothtek.com/api/v1/mission/student/answer/detail2?commitId=%s&missionId=%s' % (
+        self.stuname, globals()['missionid'])
+        headers = self.stuheaders
+        result = requests.get(url=url, headers=headers)
         print(result.text)
         print(url)
         self.assertEqual(result.json()['code'], 200)
 
-    def test_19(self):  #作业分析列表
+    def test_19(self):  # 作业分析列表
         '''作业分析列表'''
-        url='http://api.slothtek.com/api/v1/mission/teacher/query/report?pageIndex=0&createId=27717&schoolId=40&pageSize=8'
-        headers=self.tchheaders
-        result=requests.get(url=url,headers=headers)
+        url = 'http://api.slothtek.com/api/v1/mission/teacher/query/report?pageIndex=0&createId=27717&schoolId=40&pageSize=8'
+        headers = self.tchheaders
+        result = requests.get(url=url, headers=headers)
         print(result.text)
         print(url)
-        self.assertEqual(result.json()['code'],200)
+        self.assertEqual(result.json()['code'], 200)
 
-    def test_20(self):  #作业分析详情,验证刚刚改的分数
+    def test_20(self):  # 作业分析详情,验证刚刚改的分数
         '''作业分析详情,验证上条用例批改的最高分在报告中是否正常'''
-        url='http://api.slothtek.com/api/v1/mission/teacher/report/detail?missionId=%s'%globals()['missionid']
+        url = 'http://api.slothtek.com/api/v1/mission/teacher/report/detail?missionId=%s' % globals()['missionid']
         headers = self.tchheaders
         result = requests.get(url=url, headers=headers)
         print(result.text)
         print(url)
         self.assertEqual(result.json()['data']['highestScore'], 12)
 
-    def test_21(self):  #小题答题详情报告
+    def test_21(self):  # 小题答题详情报告
         '''小题答题详情报告'''
-        url='http://api.slothtek.com/api/v1/mission/teacher/analyze/item?itemId=%s&itemType=1&missionId=%s&loadExtra=true'%( globals()['itemid1'],globals()['missionid'])
-        headers=self.tchheaders
+        url = 'http://api.slothtek.com/api/v1/mission/teacher/analyze/item?itemId=%s&itemType=1&missionId=%s&loadExtra=true' % (
+        globals()['itemid1'], globals()['missionid'])
+        headers = self.tchheaders
         result = requests.get(url=url, headers=headers)
         print(result.text)
         print(url)
         self.assertEqual(result.json()['code'], 200)
 
-    def test_22(self):  #错题
+    def test_22(self):  # 错题
         '''teacher/error'''
-        url='http://api.slothtek.com/api/v1/mission/teacher/error?missionId=7662'
+        url = 'http://api.slothtek.com/api/v1/mission/teacher/error?missionId=7662'
         headers = self.tchheaders
         result = requests.get(url=url, headers=headers)
         print(result.text)

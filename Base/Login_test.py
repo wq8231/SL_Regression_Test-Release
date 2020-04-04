@@ -12,7 +12,7 @@ class LoginTest(unittest.TestCase):
     def setUpClass(self):
         self.admd5psw = LoginTest()._md5('slothtekadmin')  # 管理员账号密码
         self.adname = '19221'
-        self.tchname = '19328'
+        self.tchname = '27717'
         self.tchmd5psw = LoginTest()._md5('123456')
         self.stuname = '28000'
         self.stumd5psw = LoginTest()._md5('111111')
