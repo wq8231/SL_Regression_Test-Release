@@ -255,3 +255,35 @@ class HomeworkResources(unittest.TestCase):
         print(result.text)
         print(url)
         self.assertEqual(result.json()['code'], 200)
+<<<<<<< HEAD
+=======
+
+    def test_23(self):
+        '''网盘资源分享图片到班和校本'''
+        url='http://api.slothtek.com/api/v1/resource/share'
+        headers = self.tchheaders
+        data='{"acceptor":[{"acceptId":27819,"acceptName":"sssssx","acceptType":4},{"acceptId":27923,"acceptName":"wqqqa","acceptType":4},{"acceptId":40,"acceptType":8}],"resId":"49130"}'
+        result = requests.post(url=url, data=data, headers=headers)
+        print(result.text)
+        print(url)
+        self.assertEqual(result.json()['code'], 200)
+
+    def test_24(self):
+        '''查看原题'''
+        url='http://api.slothtek.com/api/v1/mission/common/detail?missionId=%s'%globals()['missionid']
+        headers = self.tchheaders
+        result = requests.get(url=url,headers=headers)
+        print(result.text)
+        print(url)
+        self.assertEqual(result.json()['code'], 200)
+
+    def test_25(self):
+        '''上传资源到我的资源'''
+        url='http://api.slothtek.com/api/v1/resource/upload'
+        headers=self.tchheaders
+        data='{"acceptor":[{"acceptId":40,"acceptType":8}],"bookId":-1,"fileUUID":"c_5e4d08cdc545445fa49bdee1f8847112","kpis":[],"name":"微课_2020-02-21_21-06-32","nodes":[],"relevant":[],"schoolId":40,"stageId":3,"subjectId":70,"type":11,"versionId":457}'
+        result = requests.post(url=url, data=data.encode(), headers=headers)
+        print(result.text)
+        print(url)
+        self.assertEqual(result.json()['code'], 200)
+>>>>>>> 1c3ea27b412717663ffc9266c868b15e4311daa3
